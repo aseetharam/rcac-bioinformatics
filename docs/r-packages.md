@@ -31,7 +31,7 @@ Rscript -e 'install.packages("data.table", lib="~/local/r_packages")'
 
 You can also run this within an R session, if you prefer:
 
-```bash
+```r
 BiocManager::install("DESeq2", lib="~/local/r_packages")
 install.packages("data.table", lib="~/local/r_packages")
 ```
@@ -66,10 +66,15 @@ This should load your libraries and should show the path to your custom library.
 
 Alternatively, if using RStudio, you can also set the environment variable in the RStudio configuration file. Add the following line to your ~/.Renviron file:
 
-```bash
+```r
 usethis::edit_r_environ()
-Add the line:
+```
+
+When the file opens, add the following line:
+
+```r
 R_LIBS_USER=~/local/r_packages
 ```
 
-save and restart RStudio
+save and restart RStudio. You can test `.libPaths()` in RStudio to see if the path is set correctly.
+
