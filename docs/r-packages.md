@@ -53,7 +53,11 @@ Test the installation:
 ml purge
 ml biocontainers
 ml r-scrnaseq/4.4.1-rstudio
+```
+
 and in R session:
+
+```r
 library(DESeq2)
 library(data.table)
 .libPaths()
