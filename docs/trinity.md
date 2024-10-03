@@ -2,7 +2,7 @@
 
 When running `trinity` on RCAC clusters, you will mostly likely hit the file limit if you are running Trinity on `/scratch` on Bell/Negishi cluster. Here are few recommendations to improve performance of your runs:
 
-### 1. Using `--workdir` option
+### 1. Using the `--workdir` option
 
 For the first 2 steps for Trinity (`inchworm` and `chrysalis`), number of files created are minimal. However, for the second phase (phase 2, `butterfly`), large number of files are created. You run this part of analyses on `/dev/shm` which is a memory based file system. It is faster than `/scratch` (a network drive) and does not have file limit. 
 
