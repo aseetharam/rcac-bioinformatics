@@ -7,6 +7,7 @@ parts:
 - caption: Tutorials 
   chapters:
   - file: trinity
+  - file: r-packages
 #  - file: notebooks
 #  - file: markdown-notebooks
 #- caption: Cool extensions 😎
