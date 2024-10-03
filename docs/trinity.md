@@ -109,3 +109,12 @@ Trinity \
 ```{note}
 replace `<partition-name>` and `<account-name>` with appropriate values.
 ```
+
+## Frequently Asked Questions
+
+### How can I count the number of files in a directory?
+
+There are many ways you can count the number of files in a directory. One simple way is to use the `find` command. For example, to count the number of files in a directory, you can use the following command:
+```bash
+find /path/to/directory -type f | wc -l
+```
