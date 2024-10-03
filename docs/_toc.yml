@@ -6,7 +6,7 @@ root: intro
 parts:
 - caption: Optimize! 
   chapters:
-  - file: trinity
+  - file: markdown
   - file: notebooks
   - file: markdown-notebooks
 - caption: Cool extensions 😎
