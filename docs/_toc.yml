@@ -4,7 +4,7 @@
 format: jb-book
 root: intro
 parts:
-- caption: Optimize! 
+- caption: Tutorials 
   chapters:
   - file: trinity
 #  - file: notebooks
