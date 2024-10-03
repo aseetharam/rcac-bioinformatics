@@ -16,6 +16,6 @@ python:
 #   - method: pip
 #     path: .
 
-formats:
-  - pdf
-  - epub
+#formats:
+#  - pdf
+#  - epub
