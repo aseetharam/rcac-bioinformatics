@@ -18,7 +18,7 @@ Trinity \
    --output ${RCAC_SCRATCH}/trinity_out_dir \
    --workdir /dev/shm/trinity_workdir \
    --CPU ${SLURM_CPUS_ON_NODE} \
-   --max_memory 200G
+   --max_memory 100G
 ```
 
 ```{note}
@@ -103,7 +103,7 @@ Trinity \
    --full_cleanup \
    --workdir /dev/shm/trinity_workdir \
    --CPU $SLURM_CPUS_ON_NODE \
-   --max_memory 200G
+   --max_memory 100G
 ```
 
 ```{note}
