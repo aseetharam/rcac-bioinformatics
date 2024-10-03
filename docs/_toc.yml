@@ -6,13 +6,13 @@ root: intro
 parts:
 - caption: Optimize! 
   chapters:
-  - file: markdown
-  - file: notebooks
-  - file: markdown-notebooks
-- caption: Cool extensions 😎
-  chapters:
-  - file: intersphinx
-  - file: sphinx-examples
-  - file: sphinx-hoverxref
-  - file: sphinx-proof
+  - file: trinity
+#  - file: notebooks
+#  - file: markdown-notebooks
+#- caption: Cool extensions 😎
+#  chapters:
+#  - file: intersphinx
+#  - file: sphinx-examples
+#  - file: sphinx-hoverxref
+#  - file: sphinx-proof
 
