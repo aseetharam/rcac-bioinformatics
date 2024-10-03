@@ -6,10 +6,10 @@ root: intro
 parts:
 - caption: Basic examples 🪄
   chapters:
-  - file: markdown
+  - file: trinity
   - file: notebooks
   - file: markdown-notebooks
-- caption: Cool extensions 🕶️
+- caption: Cool extensions 😎
   chapters:
   - file: intersphinx
   - file: sphinx-examples
