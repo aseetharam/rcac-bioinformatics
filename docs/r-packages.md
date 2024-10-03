@@ -17,7 +17,9 @@ This is just an example, but you can project specific package directory if you p
 For major versions of R, you may have to create a new directory for the packages. For example, `local/r_packages/4.4.1` for `R 4.4.1`.
 ```
 
-### 2.	Install the packages in your custom library:
+### 2.	 Install packages
+
+Install the packages in your custom library:
 
 ```bash
 ml purge
@@ -35,13 +37,17 @@ install.packages("data.table", lib="~/local/r_packages")
 ```
 
 
-### 3.	To ensure R knows about your custom library, add the following line to your ~/.Renviron file:
+### 3.	Add the library path
+
+To ensure R knows about your custom library, add the following line to your ~/.Renviron file:
 
 ```bash
 echo 'R_LIBS_USER=~/local/r_packages' >> ~/.Renviron
 ```
 
-### 4.	Test the installation:
+### 4.	Testing
+
+Test the installation:
 
 ```bash
 ml purge
@@ -56,7 +62,7 @@ library(data.table)
 This should load your libraries and should show the path to your custom library.
 
 
-### 5. Using RStudio
+## Using RStudio
 
 Alternatively, if using RStudio, you can also set the environment variable in the RStudio configuration file. Add the following line to your ~/.Renviron file:
 
