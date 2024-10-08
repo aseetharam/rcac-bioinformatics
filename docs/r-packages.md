@@ -42,7 +42,7 @@ install.packages("data.table", lib="~/local/r_packages")
 To ensure R knows about your custom library, add the following line to your ~/.Renviron file:
 
 ```bash
-echo 'R_LIBS_USER=~/local/r_packages' >> ~/.Renviron
+echo 'R_LIBS_USER=${R_LIBS_USER}:'~/local/r_packages'' >> ~/.Renviron
 ```
 
 ### 4.	Testing
