@@ -32,7 +32,7 @@ Depending on your downstream analyses, you may want to reconsider saving interme
 
 ### 3. Normalization of reads
 
-By default, Trinity will enable _in silico_ normalization of reads. This is especially useful if your dataset is too large. If you are using `--no_normalize_reads`, you may want to reconsider and remove this option. It will reduce the memory usage and the runtime of the Trinity run, but not alter the quality of the assembly.
+By default, Trinity will enable _in silico_ normalization of reads. This is especially useful if your dataset is too large. If you are using `--no_normalize_reads`, you may want to reconsider and remove this option. Normalization not only reduces memory usage and runtime but also improves the assembly of over-sampled transcripts. In fact, having too many reads can degrade the quality of the assembly.
 
 
 ### 4. Running Trinity stepwise
