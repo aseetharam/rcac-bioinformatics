@@ -8,6 +8,7 @@ parts:
   chapters:
   - file: trinity
   - file: r-packages
+  - file: mitohifi
 #  - file: notebooks
 #  - file: markdown-notebooks
 #- caption: Cool extensions 😎
