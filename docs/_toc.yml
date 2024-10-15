@@ -9,6 +9,7 @@ parts:
   - file: trinity
   - file: r-packages
   - file: mitohifi
+  - file: hifi_assembly
 #  - file: notebooks
 #  - file: markdown-notebooks
 #- caption: Cool extensions 😎
