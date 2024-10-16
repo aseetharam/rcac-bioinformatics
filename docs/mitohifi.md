@@ -137,6 +137,13 @@ MitoHifi will produce a series of folders with the results. The main results wil
 * `contigs_stats.tsv` - containing the statistics of your assembled mitos such as the number of genes, size, whether it was circularized or not, if the sequence has frameshifts and etc...
 * `shared_genes.tsv` - show comparison of annotation between close-related mitogenome and all potential contigs assembled
 
+Here are the plots for the maize B73 mitochondrial genome:
+
+![Fig 1](final_mitogenome.annotation.png)
+**Figure 1: Predicted genes throughout the final mitogenome**
+
+![Fig 2](final_mitogenome.coverage.png)
+**Figure 2: The sequencing coverage throughout the final mitogenome**
 
 ## 4.	References
 
