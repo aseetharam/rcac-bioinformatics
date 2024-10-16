@@ -234,7 +234,7 @@ Figure 2: Bandage visualization of the assembly graph (hap2). Similar to hap1, m
 If you are ending your analysis here, you may want to further break these regions into smaller contigs for better resolution. 
 ```
 
-## 5.	Optimizing the assembly{.tabset}
+## 5.	Optimizing the assembly
 
 After the first round of assembly, you will have the files `*.ec.bin`, `*.ovlp.source.bin`, and `*.ovlp.reverse.bin`. Save these files and try various options to see if you can improve the assembly. First, make a folder to move the `.gfa`, `.fasta`, and `.bed` files. These are the results from the first round of assembly. Second, adjust the parameters in the `hifiasm` command and run the assembler again. Third, move results to a new folder and compare the results of the first folder. You can re-run the assembly quickly and generate statistics for each of these folders and compare them to see if the changes improved the assembly.  
 
@@ -344,6 +344,9 @@ The purge level option (`-l`) in `hifiasm` controls the level of purging of hapl
 ::::
 
 
+```{note}
+Option `-l 0` seems like a good option for maize B73 genome.  The primary assembly gave us a close to estimated size (2,235.42 Mb, estimated size ~2,300 Mb) genome, with N50 of 156.47 Mb. Though the number of contigs are higher, the assembly seems to be more contiguous. 
+```
 
 ## 6.	Conclusion
 
