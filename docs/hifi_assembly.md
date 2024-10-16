@@ -131,20 +131,20 @@ This will generate a folder `maize_B73_hifi.asm.stats` with the statistics of th
 
 **Table 2: Summary statistics of the assembled contigs**
 
-| **Assembly**                  | **maize_B73_hifi.asm.bp.hap1.p_ctg** | **maize_B73_hifi.asm.bp.hap2.p_ctg** |
+| **Assembly**                  | **hap1.p_ctg**                       | **hap2.p_ctg**                       |
 |-------------------------------|--------------------------------------|--------------------------------------|
-| # contigs (>= 0 bp)            | 695                                  | 340                                  |
-| # contigs (>= 1000 bp)         | 695                                  | 340                                  |
-| # contigs (>= 5000 bp)         | 695                                  | 340                                  |
-| # contigs (>= 10000 bp)        | 695                                  | 340                                  |
-| # contigs (>= 25000 bp)        | 648                                  | 336                                  |
-| # contigs (>= 50000 bp)        | 311                                  | 245                                  |
-| Total length (>= 0 bp)         | 2,115,818,197                        | 2,146,055,694                        |
-| Total length (>= 1000 bp)      | 2,115,818,197                        | 2,146,055,694                        |
-| Total length (>= 5000 bp)      | 2,115,818,197                        | 2,146,055,694                        |
-| Total length (>= 10000 bp)     | 2,115,818,197                        | 2,146,055,694                        |
-| Total length (>= 25000 bp)     | 2,114,814,205                        | 2,145,970,005                        |
-| Total length (>= 50000 bp)     | 2,102,601,706                        | 2,142,223,242                        |
+| # contigs (>= 0 bp)           | 695                                  | 340                                  |
+| # contigs (>= 1000 bp)        | 695                                  | 340                                  |
+| # contigs (>= 5000 bp)        | 695                                  | 340                                  |
+| # contigs (>= 10000 bp)       | 695                                  | 340                                  |
+| # contigs (>= 25000 bp)       | 648                                  | 336                                  |
+| # contigs (>= 50000 bp)       | 311                                  | 245                                  |
+| Total length (>= 0 bp)        | 2,115,818,197                        | 2,146,055,694                        |
+| Total length (>= 1000 bp)     | 2,115,818,197                        | 2,146,055,694                        |
+| Total length (>= 5000 bp)     | 2,115,818,197                        | 2,146,055,694                        |
+| Total length (>= 10000 bp)    | 2,115,818,197                        | 2,146,055,694                        |
+| Total length (>= 25000 bp)    | 2,114,814,205                        | 2,145,970,005                        |
+| Total length (>= 50000 bp)    | 2,102,601,706                        | 2,142,223,242                        |
 | # contigs                     | 695                                  | 340                                  |
 | Largest contig                | 230,900,369                          | 229,694,453                          |
 | Total length                  | 2,115,818,197                        | 2,146,055,694                        |
@@ -166,20 +166,20 @@ The batch error file reports various statistics that can be used to further opti
 
 **Table 3: Log file statistics from the HiFiasm assembler**
 
-| Stage/Metric                         | Round 1                    | Round 2                    | Round 3                    | Final Statistics          |
+| Stage/Metric                         | EC Round 1                 | EC Round 2                 | EC Round 3                 | Final Statistics          |
 |--------------------------------------|----------------------------|----------------------------|----------------------------|---------------------------|
-| Total Bases                          | 70,099,174,236             | 70,119,906,168             | 70,120,349,660             |                           |
-| Corrected Bases                      | 103,540,747                | 2,197,978                  | 542,087                    |                           |
-| Distinct Minimizer k-mers            | 21,419,636                 | 55,569,142                 | 52,995,420                 |                           |
-| Total Minimizers Collected           | 1,933,199,140              | 1,922,092,195              | 1,921,066,641              |                           |
-| Indexed Positions                    | 1,900,001,047              | 1,919,860,458              | 1,919,551,332              |                           |
-| Lowest Count (minimizer counts)      | 120,083                    | 88,084                     | 85,356                     |                           |
-| Highest Count (minimizer counts)     | 2,173,728                  | 2,149,445                  | 2,149,330                  |                           |
-| Peak Homozygous Coverage  (`peak_hom`)           | 31                         | 30                         | 31                         |                           |
-| Peak Heterozygous Coverage (`peak_hom`)          | -1                         | -1                         | -1                         |                           |
-| Primary Contig Coverage Range        | -                          | -                          | -                          | [25, infinity]            |
-| Homozygous Read Coverage Threshold   | -                          | -                          | -                          | 30                        |
-| Purge Duplication Coverage Threshold | -                          | -                          | -                          | 38                        |
+| Total bases                          | 70,099,174,236             | 70,119,906,168             | 70,120,349,660             |                           |
+| Corrected bases                      | 103,540,747                | 2,197,978                  | 542,087                    |                           |
+| Distinct minimizers (k-mers)         | 21,419,636                 | 55,569,142                 | 52,995,420                 |                           |
+| Total minimizers (k-mers)            | 1,933,199,140              | 1,922,092,195              | 1,921,066,641              |                           |
+| Indexed positions                    | 1,900,001,047              | 1,919,860,458              | 1,919,551,332              |                           |
+| Lowest minimizer count               | 120,083                    | 88,084                     | 85,356                     |                           |
+| Highest minimizer count              | 2,173,728                  | 2,149,445                  | 2,149,330                  |                           |
+| `peak_hom` coverage                  | 31                         | 30                         | 31                         |                           |
+| `peak_het` coverage                  | -1                         | -1                         | -1                         |                           |
+| Primary contig coverage range        | -                          | -                          | -                          | [25, infinity]            |
+| Homozygous read coverage threshold   | -                          | -                          | -                          | 30                        |
+| Purge duplication coverage threshold | -                          | -                          | -                          | 38                        |
 | Total Overlaps                       | -                          | -                          | -                          | 319,716,290               |
 | Strong Overlaps                      | -                          | -                          | -                          | 90,793,983                |
 | Weak Overlaps                        | -                          | -                          | -                          | 228,922,307               |
@@ -200,7 +200,7 @@ Some ket takeaways from the log file are:
 - The counts of distinct minimizer k-mers illustrate how the complexity of the data evolves throughout the assembly process.
 - The total number of overlaps, categorized by type (strong, weak, exact, and inexact), provides insights into the quality of the assembly.
 - The `peak_hom` and `peak_het` values indicate the levels of heterozygosity, while the homozygous read coverage threshold reflects the value used for the `--hom-cov` parameter. This can serve as a starting point for fine-tuning this option in future runs.
-- The purge duplication coverage threshold was automatically set to **38**. Depending on the observed heterozygosity level, you may want to adjust this value in subsequent assemblies.
+- The purge duplication coverage threshold was automatically set to **38**. Depending on the observed heterozygosity level, you may want to adjust `--purge-max` value in subsequent assemblies.
 - The peak memory usage of **68.521 GB** is a critical metric for assessing the computational resources required for the assembly process. This information can be used to optimize future runs based on the available resources.
 
 
@@ -235,6 +235,33 @@ If you are ending your analysis here, you may want to further break these region
 ```
 
 ## 5.	Optimizing the assembly
+
+After the first round of assembly, you will have the files `*.ec.bin`, `*.ovlp.source.bin`, and `*.ovlp.reverse.bin`. Save these files and try various options to see if you can improve the assembly. First, make a folder to move the `.gfa`, `.fasta`, and `.bed` files. These are the results from the first round of assembly. Second, adjust the parameters in the `hifiasm` command and run the assembler again. Third, move results to a new folder and compare the results of the first folder. You can re-run the assembly quickly and generate statistics for each of these folders and compare them to see if the changes improved the assembly.  
+
+The purge level option (`-l`) in `hifiasm` controls the level of purging of haplotigs. The default value is 3, which means it will purge all types of haplotigs in the most aggressive way. If you are running it against a diploid inbred line like B73, this might not be an ideal number. Here is how it alters the assembly at `-l 1` and `-l 2` and `-l 3`. 
+
+**Table 4: Summary statistics of the assembled contigs with different options**
+
+| Assembly                               | option -l 0 |         | option -l 1 |         | option -l 2 |         | option -l 3 |         |
+|:---------------------------------------|------------:|--------:|------------:|--------:|------------:|--------:|------------:|--------:|
+|                                        |      a_ctg | p_ctg  |      hap1.p_ctg | hap2.p_ctg |      hap1.p_ctg | hap2.p_ctg |      hap1.p_ctg | hap2.p_ctg |
+| # contigs (>= 0 bp)                   |         837 |     710 |         709 |     374 |         702 |     291 |         695 |     340 |
+| # contigs (>= 10000 bp)               |         831 |     709 |         708 |     374 |         701 |     291 |         695 |     340 |
+| # contigs (>= 25000 bp)               |         680 |     663 |         661 |     372 |         654 |     287 |         648 |     336 |
+| # contigs (>= 50000 bp)               |          33 |     325 |         319 |     301 |         311 |     213 |         311 |     245 |
+| Total length (>= 0 bp) (mb)           |       28.14 |  2,235.42 |    2164.69 |  1,724.11 |    2164.74 |  2,164.57 |    2,115.82 |  2,146.06 |
+| Total length (>= 10000 bp) (mb)       |       28.09 |  2,235.41 |    2164.68 |  1,724.11 |    2164.73 |  2,164.57 |    2,115.82 |  2,146.06 |
+| Total length (>= 25000 bp) (mb)       |       25.02 |  2,234.42 |    2163.68 |  1,724.06 |    2163.73 |  2,164.49 |    2,114.81 |  2,145.97 |
+| Total length (>= 50000 bp) (mb)       |        2.37 |  2,222.08 |    2151.23 |  1,721.39 |    2151.27 |  2,161.38 |    2,102.60 |  2,142.22 |
+| # contigs                              |         837 |     710 |         709 |     374 |         702 |     291 |         695 |     340 |
+| Largest contig (mb)                   |        0.21 |   230.90 |     230.90 |  228.81 |     230.90 |  229.69 |     230.90 |  229.69 |
+| Total length (mb)                     |       28.14 |  2,235.42 |    2164.69 |  1,724.11 |    2164.74 |  2,164.57 |    2,115.82 |  2,146.06 |
+| N50 (mb)                               |        0.04 |  156.47 |    152.60 |   39.08 |    152.60 |  131.66 |    92.33 |  156.75 |
+| N90 (mb)                               |        0.02 |   20.84 |      9.46 |    2.67 |      9.46 |   17.33 |    8.07 |  10.92 |
+| auN (mb)                               |        0.04 |  140.18 |    119.20 |   98.99 |    119.19 |  128.48 |    110.84 |  131.18 |
+| L50                                    |         326 |       6 |         6 |      6 |         6 |      6 |         7 |      6 |
+| L90                                    |         693 |      18 |        30 |     94 |        30 |     23 |        39 |     23 |
+| # N's per 100 kbp                     |           0 |       0 |         0 |      0 |         0 |      0 |         0 |      0 |
 
 
 
