@@ -139,10 +139,14 @@ MitoHifi will produce a series of folders with the results. The main results wil
 
 Here are the plots for the maize B73 mitochondrial genome:
 
+
 ![Fig 1](final_mitogenome.annotation.png)
+
 **Figure 1: Predicted genes throughout the final mitogenome**
 
+
 ![Fig 2](final_mitogenome.coverage.png)
+
 **Figure 2: The sequencing coverage throughout the final mitogenome**
 
 ## 4.	References
