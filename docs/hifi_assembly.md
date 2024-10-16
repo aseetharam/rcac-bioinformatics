@@ -221,14 +221,14 @@ Now you can run `bandage` and open the `*noseq.gfa` files.
 
 ![Fig 1](hifiasm_hap1_bandage.png)
 
-Figure 1: Bandage visualization of the assembly graph (hap1). While most contigs are constructed from a single unitig, there are a few contigs that maybe joined from multiple unitigs. The largest contig appears to be made of multiple unitigs and terminal region may not be fully resolved.
+**Figure 1: Bandage visualization of the assembly graph (hap1). While most contigs are constructed from a single unitig, there are a few contigs that maybe joined from multiple unitigs. The largest contig appears to be made of multiple unitigs and terminal region may not be fully resolved.**
 
 There are likely other contigs that may not be fully resolved but since we plan to use Optical Genome Mapping (OGM) data to scaffold the assembly, we can proceed with the current assembly. The OGM data will help resolve these regions and provide a more contiguous assembly.
 
 
 ![Fig 2](hifiasm_hap2_bandage.png)
 
-Figure 2: Bandage visualization of the assembly graph (hap2). Similar to hap1, most contigs are constructed from a single unitig, and largest contig may not be fully resolved. 
+**Figure 2: Bandage visualization of the assembly graph (hap2). Similar to hap1, most contigs are constructed from a single unitig, and largest contig may not be fully resolved.**
 
 ```{warning}
 If you are ending your analysis here, you may want to further break these regions into smaller contigs for better resolution. 
