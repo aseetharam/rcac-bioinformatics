@@ -243,7 +243,9 @@ The purge level option (`-l`) in `hifiasm` controls the level of purging of hapl
 **Table 4: Summary statistics of the assembled contigs with different options**
 
 
-### option -l 0
+::::{tab-set}
+
+:::{tab-item} purge level `-l 0`
 
 | Assembly                               | a_ctg | p_ctg  |
 |:---------------------------------------|-------:|--------:|
@@ -265,9 +267,9 @@ The purge level option (`-l`) in `hifiasm` controls the level of purging of hapl
 | L90                                    |    693 |      18 |
 | # N's per 100 kbp                     |      0 |       0 |
 
----
+:::
 
-### option -l 1
+:::{tab-item} purge level `-l 1`
 
 | Assembly                               | hap1.p_ctg | hap2.p_ctg |
 |:---------------------------------------|------------:|------------:|
@@ -289,9 +291,9 @@ The purge level option (`-l`) in `hifiasm` controls the level of purging of hapl
 | L90                                    |         18 |         94 |
 | # N's per 100 kbp                     |          0 |          0 |
 
----
+:::
 
-### option -l 2
+:::{tab-item} purge level `-l 2`
 
 | Assembly                               | hap1.p_ctg | hap2.p_ctg |
 |:---------------------------------------|------------:|------------:|
@@ -313,9 +315,9 @@ The purge level option (`-l`) in `hifiasm` controls the level of purging of hapl
 | L90                                    |         30 |         23 |
 | # N's per 100 kbp                     |          0 |          0 |
 
----
+:::
 
-# option -l 3
+:::{tab-item} purge level `-l 3` (default)
 
 | Assembly                               | hap1.p_ctg | hap2.p_ctg |
 |:---------------------------------------|------------:|------------:|
@@ -336,6 +338,10 @@ The purge level option (`-l`) in `hifiasm` controls the level of purging of hapl
 | L50                                    |          7 |          6 |
 | L90                                    |         39 |         23 |
 | # N's per 100 kbp                     |          0 |          0 |
+
+:::
+
+::::
 
 
 
