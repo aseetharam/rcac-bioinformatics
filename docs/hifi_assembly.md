@@ -162,6 +162,48 @@ The statistics show that the assembly is of high quality with N50 of 92MB and 15
 The `hifiasm` job was run on `negishi` cluster with 64 CPUs and 128Gb memory. The job took about ~3 hours to complete  (02:54:44). The reported memory usage was 68.47GB. 
 ```
 
+The batch error file reports various statistics that can be used to further optimize the assembly. Here are some of the important statistics:
+
+**Table 3: Log file statistics from the HiFiasm assembler**
+
+| Stage/Metric                         | Round 1                    | Round 2                    | Round 3                    | Final Statistics          |
+|--------------------------------------|----------------------------|----------------------------|----------------------------|---------------------------|
+| Total Bases                          | 70,099,174,236             | 70,119,906,168             | 70,120,349,660             |                           |
+| Corrected Bases                      | 103,540,747                | 2,197,978                  | 542,087                    |                           |
+| Distinct Minimizer k-mers            | 21,419,636                 | 55,569,142                 | 52,995,420                 |                           |
+| Total Minimizers Collected           | 1,933,199,140              | 1,922,092,195              | 1,921,066,641              |                           |
+| Indexed Positions                    | 1,900,001,047              | 1,919,860,458              | 1,919,551,332              |                           |
+| Lowest Count (minimizer counts)      | 120,083                    | 88,084                     | 85,356                     |                           |
+| Highest Count (minimizer counts)     | 2,173,728                  | 2,149,445                  | 2,149,330                  |                           |
+| Peak Homozygous Coverage  (`peak_hom`)           | 31                         | 30                         | 31                         |                           |
+| Peak Heterozygous Coverage (`peak_hom`)          | -1                         | -1                         | -1                         |                           |
+| Primary Contig Coverage Range        | -                          | -                          | -                          | [25, infinity]            |
+| Homozygous Read Coverage Threshold   | -                          | -                          | -                          | 30                        |
+| Purge Duplication Coverage Threshold | -                          | -                          | -                          | 38                        |
+| Total Overlaps                       | -                          | -                          | -                          | 319,716,290               |
+| Strong Overlaps                      | -                          | -                          | -                          | 90,793,983                |
+| Weak Overlaps                        | -                          | -                          | -                          | 228,922,307               |
+| Exact Overlaps                       | -                          | -                          | -                          | 316,212,759               |
+| Inexact Overlaps                     | -                          | -                          | -                          | 3,503,531                 |
+| Overlaps without Large Indels        | -                          | -                          | -                          | 319,293,584               |
+| Reverse Overlaps                     | -                          | -                          | -                          | 45,529,962                |
+| Real Time (seconds)                  | -                          | -                          | -                          | 10,477.790                |
+| CPU Time (seconds)                   | -                          | -                          | -                          | 479,529.220               |
+| Peak Memory Usage (GB)               | -                          | -                          | -                          | 68.521                    |
+
+
+Some ket takeaways from the log file are:
+
+
+- The total number of bases in the input file is **70,099,174,236**, corresponding to approximately **29.2x coverage** of the maize genome.
+- The assembler made significant corrections in the first two rounds, correcting **103,540,747** and **2,197,978** bases, respectively, but only **542,087** in the third round. If the third round number is still too high, consider increasing the `-r` parameter (which sets the rounds of haplotype-aware error corrections, defaulting to 3).
+- The counts of distinct minimizer k-mers illustrate how the complexity of the data evolves throughout the assembly process.
+- The total number of overlaps, categorized by type (strong, weak, exact, and inexact), provides insights into the quality of the assembly.
+- The `peak_hom` and `peak_het` values indicate the levels of heterozygosity, while the homozygous read coverage threshold reflects the value used for the `--hom-cov` parameter. This can serve as a starting point for fine-tuning this option in future runs.
+- The purge duplication coverage threshold was automatically set to **38**. Depending on the observed heterozygosity level, you may want to adjust this value in subsequent assemblies.
+- The peak memory usage of **68.521 GB** is a critical metric for assessing the computational resources required for the assembly process. This information can be used to optimize future runs based on the available resources.
+
+
 ## 4.	Visualizing the assembly
 
 To better understand how well the assembly is constructed, we can use the `noseq.gfa` files generated by `hifiasm` to visualize the assembly graph. We can use `bandage` for this purpose. These files are small and `bandage` can be run from your local machine. Get the required files and install `bandage` on your local machine. 
@@ -192,7 +234,12 @@ Figure 2: Bandage visualization of the assembly graph (hap2). Similar to hap1, m
 If you are ending your analysis here, you may want to further break these regions into smaller contigs for better resolution. 
 ```
 
-## 5.	Conclusion
+## 5.	Optimizing the assembly
+
+
+
+
+## 6.	Conclusion
 
 In this tutorial, we have assembled the maize B73 genome using PacBio HiFi reads. The assembled contigs are of high quality and can be further scaffolded using Optical Genome Mapping data or Hi-C data. These contigs are purely based on the HiFi reads there could be unresolved or incorrect contigs. Using homology approches, we can further validate the assembly and fix those regions.  
 
