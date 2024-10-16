@@ -234,7 +234,7 @@ Figure 2: Bandage visualization of the assembly graph (hap2). Similar to hap1, m
 If you are ending your analysis here, you may want to further break these regions into smaller contigs for better resolution. 
 ```
 
-## 5.	Optimizing the assembly
+## 5.	Optimizing the assembly{.tabset}
 
 After the first round of assembly, you will have the files `*.ec.bin`, `*.ovlp.source.bin`, and `*.ovlp.reverse.bin`. Save these files and try various options to see if you can improve the assembly. First, make a folder to move the `.gfa`, `.fasta`, and `.bed` files. These are the results from the first round of assembly. Second, adjust the parameters in the `hifiasm` command and run the assembler again. Third, move results to a new folder and compare the results of the first folder. You can re-run the assembly quickly and generate statistics for each of these folders and compare them to see if the changes improved the assembly.  
 
@@ -242,27 +242,100 @@ The purge level option (`-l`) in `hifiasm` controls the level of purging of hapl
 
 **Table 4: Summary statistics of the assembled contigs with different options**
 
-| Assembly                               | option -l 0 |         | option -l 1 |         | option -l 2 |         | option -l 3 |         |
-|:---------------------------------------|------------:|--------:|------------:|--------:|------------:|--------:|------------:|--------:|
-|                                        |      a_ctg | p_ctg  |      hap1.p_ctg | hap2.p_ctg |      hap1.p_ctg | hap2.p_ctg |      hap1.p_ctg | hap2.p_ctg |
-| # contigs (>= 0 bp)                   |         837 |     710 |         709 |     374 |         702 |     291 |         695 |     340 |
-| # contigs (>= 10000 bp)               |         831 |     709 |         708 |     374 |         701 |     291 |         695 |     340 |
-| # contigs (>= 25000 bp)               |         680 |     663 |         661 |     372 |         654 |     287 |         648 |     336 |
-| # contigs (>= 50000 bp)               |          33 |     325 |         319 |     301 |         311 |     213 |         311 |     245 |
-| Total length (>= 0 bp) (mb)           |       28.14 |  2,235.42 |    2164.69 |  1,724.11 |    2164.74 |  2,164.57 |    2,115.82 |  2,146.06 |
-| Total length (>= 10000 bp) (mb)       |       28.09 |  2,235.41 |    2164.68 |  1,724.11 |    2164.73 |  2,164.57 |    2,115.82 |  2,146.06 |
-| Total length (>= 25000 bp) (mb)       |       25.02 |  2,234.42 |    2163.68 |  1,724.06 |    2163.73 |  2,164.49 |    2,114.81 |  2,145.97 |
-| Total length (>= 50000 bp) (mb)       |        2.37 |  2,222.08 |    2151.23 |  1,721.39 |    2151.27 |  2,161.38 |    2,102.60 |  2,142.22 |
-| # contigs                              |         837 |     710 |         709 |     374 |         702 |     291 |         695 |     340 |
-| Largest contig (mb)                   |        0.21 |   230.90 |     230.90 |  228.81 |     230.90 |  229.69 |     230.90 |  229.69 |
-| Total length (mb)                     |       28.14 |  2,235.42 |    2164.69 |  1,724.11 |    2164.74 |  2,164.57 |    2,115.82 |  2,146.06 |
-| N50 (mb)                               |        0.04 |  156.47 |    152.60 |   39.08 |    152.60 |  131.66 |    92.33 |  156.75 |
-| N90 (mb)                               |        0.02 |   20.84 |      9.46 |    2.67 |      9.46 |   17.33 |    8.07 |  10.92 |
-| auN (mb)                               |        0.04 |  140.18 |    119.20 |   98.99 |    119.19 |  128.48 |    110.84 |  131.18 |
-| L50                                    |         326 |       6 |         6 |      6 |         6 |      6 |         7 |      6 |
-| L90                                    |         693 |      18 |        30 |     94 |        30 |     23 |        39 |     23 |
-| # N's per 100 kbp                     |           0 |       0 |         0 |      0 |         0 |      0 |         0 |      0 |
 
+### option -l 0
+
+| Assembly                               | a_ctg | p_ctg  |
+|:---------------------------------------|-------:|--------:|
+| # contigs (>= 0 bp)                   |    837 |     710 |
+| # contigs (>= 10000 bp)               |    831 |     709 |
+| # contigs (>= 25000 bp)               |    680 |     663 |
+| # contigs (>= 50000 bp)               |     33 |     325 |
+| Total length (>= 0 bp) (mb)           |  28.14 |  2,235.42 |
+| Total length (>= 10000 bp) (mb)       |  28.09 |  2,235.41 |
+| Total length (>= 25000 bp) (mb)       |  25.02 |  2,234.42 |
+| Total length (>= 50000 bp) (mb)       |   2.37 |  2,222.08 |
+| # contigs                              |    837 |     710 |
+| Largest contig (mb)                   |   0.21 |   230.90 |
+| Total length (mb)                     |  28.14 |  2,235.42 |
+| N50 (mb)                               |   0.04 |  156.47 |
+| N90 (mb)                               |   0.02 |   20.84 |
+| auN (mb)                               |   0.04 |  140.18 |
+| L50                                    |    326 |       6 |
+| L90                                    |    693 |      18 |
+| # N's per 100 kbp                     |      0 |       0 |
+
+---
+
+### option -l 1
+
+| Assembly                               | hap1.p_ctg | hap2.p_ctg |
+|:---------------------------------------|------------:|------------:|
+| # contigs (>= 0 bp)                   |         709 |         374 |
+| # contigs (>= 10000 bp)               |         708 |         374 |
+| # contigs (>= 25000 bp)               |         661 |         372 |
+| # contigs (>= 50000 bp)               |         319 |         301 |
+| Total length (>= 0 bp) (mb)           |     2,164.69 |    1,724.11 |
+| Total length (>= 10000 bp) (mb)       |     2,164.68 |    1,724.11 |
+| Total length (>= 25000 bp) (mb)       |     2,163.68 |    1,724.06 |
+| Total length (>= 50000 bp) (mb)       |     2,151.23 |    1,721.39 |
+| # contigs                              |         709 |         374 |
+| Largest contig (mb)                   |     230.90 |     228.81 |
+| Total length (mb)                     |     2,164.69 |    1,724.11 |
+| N50 (mb)                               |     152.60 |     39.08 |
+| N90 (mb)                               |       9.46 |      2.67 |
+| auN (mb)                               |     119.20 |     98.99 |
+| L50                                    |          6 |          6 |
+| L90                                    |         18 |         94 |
+| # N's per 100 kbp                     |          0 |          0 |
+
+---
+
+### option -l 2
+
+| Assembly                               | hap1.p_ctg | hap2.p_ctg |
+|:---------------------------------------|------------:|------------:|
+| # contigs (>= 0 bp)                   |         702 |         291 |
+| # contigs (>= 10000 bp)               |         701 |         291 |
+| # contigs (>= 25000 bp)               |         654 |         287 |
+| # contigs (>= 50000 bp)               |         311 |         213 |
+| Total length (>= 0 bp) (mb)           |     2,164.74 |    2,164.57 |
+| Total length (>= 10000 bp) (mb)       |     2,164.73 |    2,164.57 |
+| Total length (>= 25000 bp) (mb)       |     2,163.73 |    2,164.49 |
+| Total length (>= 50000 bp) (mb)       |     2,151.27 |    2,161.38 |
+| # contigs                              |         702 |         291 |
+| Largest contig (mb)                   |     230.90 |     229.69 |
+| Total length (mb)                     |     2,164.74 |    2,164.57 |
+| N50 (mb)                               |     152.60 |     131.66 |
+| N90 (mb)                               |       9.46 |      17.33 |
+| auN (mb)                               |     119.19 |    128.48 |
+| L50                                    |          6 |          6 |
+| L90                                    |         30 |         23 |
+| # N's per 100 kbp                     |          0 |          0 |
+
+---
+
+# option -l 3
+
+| Assembly                               | hap1.p_ctg | hap2.p_ctg |
+|:---------------------------------------|------------:|------------:|
+| # contigs (>= 0 bp)                   |         695 |         340 |
+| # contigs (>= 10000 bp)               |         695 |         340 |
+| # contigs (>= 25000 bp)               |         648 |         336 |
+| # contigs (>= 50000 bp)               |         311 |         245 |
+| Total length (>= 0 bp) (mb)           |     2,115.82 |    2,146.06 |
+| Total length (>= 10000 bp) (mb)       |     2,115.82 |    2,146.06 |
+| Total length (>= 25000 bp) (mb)       |     2,114.81 |    2,145.97 |
+| Total length (>= 50000 bp) (mb)       |     2,102.60 |    2,142.22 |
+| # contigs                              |         695 |         340 |
+| Largest contig (mb)                   |     230.90 |     229.69 |
+| Total length (mb)                     |     2,115.82 |    2,146.06 |
+| N50 (mb)                               |     92.33 |    156.75 |
+| N90 (mb)                               |      8.07 |      10.92 |
+| auN (mb)                               |     110.84 |    131.18 |
+| L50                                    |          7 |          6 |
+| L90                                    |         39 |         23 |
+| # N's per 100 kbp                     |          0 |          0 |
 
 
 
