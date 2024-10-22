@@ -193,31 +193,31 @@ busco \
     -f
 ```
 
-Once the BUSCO profiling is done, the results will be in the 
+Once the BUSCO profiling is done, the results can be compared. Here are the results
 
-for helixer
-```
-        C:98.2%[S:82.8%,D:15.4%],F:0.7%,M:1.1%,n:4896
-        4808    Complete BUSCOs (C)
-        4053    Complete and single-copy BUSCOs (S)
-        755     Complete and duplicated BUSCOs (D)
-        34      Fragmented BUSCOs (F)
-        54      Missing BUSCOs (M)
-        4896    Total BUSCO groups searched
+| Category                    | Helixer            | B73.v5 (MaizeGDB)  | B73.v5 (Reference) |
+|-----------------------------|:------------------|--------------------|--------------------|
+| Complete BUSCOs             | 4,808 (98.2%)     | 47,29 (96.6%)      | 4,807 (98.2%)      |
+| Single-Copy BUSCOs          | 4,053 (82.8%)     | 2,123 (43.4%)      | 4,053 (82.8%)      |
+| Duplicated BUSCOs           | 755 (15.4%)       | 2606 (53.2%)       | 754 (15.4%)        |
+| Fragmented BUSCOs           | 34 (0.7%)         | 39 (0.8%)          | 10 (0.2%)          |
+| Missing BUSCOs              | 54 (1.1%)         | 128 (2.6%)         | 79 (1.6%)          |
+| Total BUSCOs                | 4,896             | 4,896              | 4,896              |
 
-```
+or visualized as a stacked bar plot:
 
-for NAM.v5 annotations
 
-```
-        C:96.6%[S:43.4%,D:53.2%],F:0.8%,M:2.6%,n:4896
-        4729    Complete BUSCOs (C)
-        2123    Complete and single-copy BUSCOs (S)
-        2606    Complete and duplicated BUSCOs (D)
-        39      Fragmented BUSCOs (F)
-        128     Missing BUSCOs (M)
-        4896    Total BUSCO groups searched
+![Busco results](assets/figures/busco_figure.png)
 
+```{note}
+The Helixer predictions shows higher number of complete BUSCOs (single-copy + duplicated) than current B73.v5 annotations available at MaizeGDB. It also reports only 54 missing BUSCOs, lowest among all 3 BUSCO results meaning it was able to recover more BUSCO genes than what BUSCO software could predict/recover using AUGUSTUS/tblastn search!
 ```
 
 
+```{warning}
+The duplicated genes in B73.v5 (MaizeGDB) should not be interpreted as paralogs. Since we did not use just primary transcripts for running BUSCO, the alternative isoforms of the same gene are reported as "duplicated". 
+```
+
+### B. Comparing annotations
+
+Coming soon!
