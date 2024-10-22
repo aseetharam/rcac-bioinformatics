@@ -147,7 +147,7 @@ gffread B73-helixer_v1.0.gff3 \
 ```
 
 
-### A. BUSCO profiling
+### B. BUSCO profiling
 
 We will use BUSCO to profile the predicted genes and reference annotations.
 
@@ -193,7 +193,10 @@ busco \
     -f
 ```
 
-Once the BUSCO profiling is done, the results can be compared. Here are the results
+Once the BUSCO profiling is done, the results can be compared. 
+
+**Table 1: BUSCO results**
+
 
 | Category                    | Helixer            | B73.v5 (MaizeGDB)  | B73.v5 (Reference) |
 |-----------------------------|:------------------|--------------------|--------------------|
@@ -209,6 +212,8 @@ or visualized as a stacked bar plot:
 
 ![Busco results](assets/figures/busco_figure.png)
 
+**Figure 1: BUSCO results for Helixer, B73.v5 (MaizeGDB) and B73.v5 (Reference) annotations.**
+
 ```{note}
 The Helixer predictions shows higher number of complete BUSCOs (single-copy + duplicated) than current B73.v5 annotations available at MaizeGDB. It also reports only 54 missing BUSCOs, lowest among all 3 BUSCO results meaning it was able to recover more BUSCO genes than what BUSCO software could predict/recover using AUGUSTUS/tblastn search!
 ```
@@ -218,6 +223,61 @@ The Helixer predictions shows higher number of complete BUSCOs (single-copy + du
 The duplicated genes in B73.v5 (MaizeGDB) should not be interpreted as paralogs. Since we did not use just primary transcripts for running BUSCO, the alternative isoforms of the same gene are reported as "duplicated". 
 ```
 
-### B. Comparing annotations
+### C. Comparing annotations
 
-Coming soon!
+We will use `mikado` to compare the annotations. Mikado is a tool to compare and merge gene annotations. We will use the `mikado compare` command to compare the annotations. We will filter V5 annotations to only include primary transcripts and only compare protein coding genes.
+
+```bash
+conda activate mikado
+mikado compare \
+    --protein-coding \
+    -r B73.v5_primary-only.gff3 \
+    -p B73-helixer_v1.0.gff3 \
+    -o ref_NAM.B73v5-vs-prediction_HELIXERv1_compared \
+    --log compare.log
+```
+
+The output will be in the `ref_NAM.B73v5-vs-prediction_HELIXERv1_compared` directory. The `summary.tsv` file will have the comparison results.
+
+**Table 2: Mikado comparison results**
+
+| Comparison Level              | Sensitivity (Sn) | Precision (Pr) | F1 Score |
+|-------------------------------|------------------|----------------|----------|
+| Base level                    | 81.90%           | 75.29%         | 78.46%   |
+| Exon level (stringent)         | 53.21%           | 42.82%         | 47.46%   |
+| Exon level (lenient)           | 75.93%           | 61.02%         | 67.66%   |
+| Splice site level              | 85.06%           | 65.89%         | 74.26%   |
+| Intron level                   | 78.45%           | 60.77%         | 68.49%   |
+| Intron chain level (stringent) | 38.10%           | 32.85%         | 35.28%   |
+| Transcript level (>=80% base F1)| 36.89%          | 34.98%         | 35.91%   |
+| Gene level (>=80% base F1)     | 36.89%           | 34.98%         | 35.91%   |
+
+```{note}
+When compared against each other, the Helixer predictions, at base level, matches the B73.v5 (maizeGDB annotations) really well. However, the precision is lower for Helixer predictions, likely because there are higher number of novel genes predicted in Helixer that are non existant in B73.v5 annotations. 
+```
+
+**Table 3: Summary of comparison**
+
+| Feature          | Total Count | Missed Count (%)  | Novel Count (%)  |
+|------------------|-------------|-------------------|------------------|
+| Transcripts      | 39,756      | 7,539 (18.96%)    | 8,306 (19.81%)   |
+| Genes            | 39,756      | 7,539 (18.96%)    | 8,306 (19.81%)   |
+
+
+```{note}
+The Helixer predictions missed 7,359 predictions (out of 39,756) that were in B73.v5, but also predicted 8,306 novel transcripts. Since Helixer does not predict isoforms, the number of genes and transcripts are the same.  
+```
+
+
+## 5. References
+
+- [Helixer GitHub](https://github.com/weberlab-hhu/Helixer)
+- [Helixer Webtool](https://www.plabipd.de/helixer_main.html/)
+
+- Holst F, Bolger A, Günther C, Maß J, Kindel F, Triesch S, Kiel N, Saadat N, Ebenhöh O, Usadel B,Schwacke R, Bolger M, Weber APM, Denton AK
+Helixer - de novo prediction of primary eukaryotic gene models combining deep learning and aHidden Markov model.
+bioRxiv. 2023 Feb 06: 2023.02.06.527280.  Preprint. (not been certified by peer review)
+
+- Stiehler F, Steinborn M, Scholz S, Dey D, Weber APM, Denton AK
+Helixer: cross-species gene annotation of large eukaryotic genomes using deep learning.
+Bioinformatics. 2020 Dec, 36(22-23): 5291-5298.
