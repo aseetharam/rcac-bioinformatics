@@ -268,6 +268,57 @@ When compared against each other, the Helixer predictions, at base level, matche
 The Helixer predictions missed 7,359 predictions (out of 39,756) that were in B73.v5, but also predicted 8,306 novel transcripts. Since Helixer does not predict isoforms, the number of genes and transcripts are the same.  
 ```
 
+### D. Feature assignment
+
+B73 has extensive expression data and this can be used to evaluate the gene predictions. If the annotations are accurate, more RNA-seq reads will align within the predicted features, making a higher proportion of assigned reads an indicator of annotation accuracy. Similarly, higher proportions of unassigned reads indicate potential inaccuracies in the annotations, suggesting that important features may be missing or incorrectly predicted.
+
+Expression data for B73 was downloaded from MaizeGDB (as BAM files) and feature assignment was done using `featureCounts` from the `subread` package (both NAM.v5 and Helixer predictions). 
+
+
+```bash
+ml biocontainers
+ml subread
+featureCounts \
+    -T 8 \
+    -a Zm-B73-REFERENCE-NAM-5.0_Zm00001eb.1.gff3 \
+    -o v5.str2 \
+    -s 2 \
+    -p --countReadPairs \
+    -t gene -g ID \
+    --tmpDir /dev/shm \
+    *.bam &> v5_gene-str2_PE.stdout
+
+featureCounts \
+    -T 8 \
+    -a B73-helixer_v1.0.gff3 \
+    -o helixer.str2 \
+    -s 2 \
+    -p --countReadPairs \
+    -t gene -g ID \
+    --tmpDir /dev/shm \
+    *.bam &> helixer_gene-str2_PE.stdout
+```
+
+::::{tab-set}
+
+:::{tab-item} Assigned Features
+
+![assigned](assets/figures/assigned.png)
+
+:::
+
+:::{tab-item} Unassigned Features
+
+![unassigned](assets/figures/unassigned.png)
+:::
+
+::::
+
+The code used for parsing `featureCounts` summary files and generating the plots can be found here: [`parse_subreads.R`](scripts/parse_subreads.R)
+
+```{note}
+something about the plots
+```
 
 ## 5. References
 
