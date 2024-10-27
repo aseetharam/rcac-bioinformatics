@@ -378,8 +378,11 @@ done
 
 ::::
 
+The code used for parsing final `entap_results.tsv` files and generating the plots can be found here: [`parse_subreads.R`](assets/scripts/parse_subreads.R)
 
-
+```{note}
+add notes
+```
 
 
 ## 5. References
