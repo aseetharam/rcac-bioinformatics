@@ -201,7 +201,7 @@ Once the BUSCO profiling is done, the results can be compared.
 
 | Category                    | Helixer            | B73.v5 (MaizeGDB)  | B73.v5 (Reference) |
 |-----------------------------|:------------------|--------------------|--------------------|
-| Complete BUSCOs             | 4,808 (98.2%)     | 47,29 (96.6%)      | 4,807 (98.2%)      |
+| Complete BUSCOs             | 4,808 (98.2%)     | 4,729 (96.6%)      | 4,807 (98.2%)      |
 | Single-Copy BUSCOs          | 4,053 (82.8%)     | 2,123 (43.4%)      | 4,053 (82.8%)      |
 | Duplicated BUSCOs           | 755 (15.4%)       | 2606 (53.2%)       | 754 (15.4%)        |
 | Fragmented BUSCOs           | 34 (0.7%)         | 39 (0.8%)          | 10 (0.2%)          |
@@ -321,7 +321,7 @@ featureCounts \
 
 ::::
 
-The code used for parsing `featureCounts` summary files and generating the plots can be found here: [`parse_subreads.R`](scripts/parse_subreads.R)
+The code used for parsing `featureCounts` summary files and generating the plots can be found here: [`parse_subreads.R`](assets/scripts/parse_subreads.R)
 
 ```{note}
 something about the plots
@@ -346,6 +346,39 @@ EnTAP \
     --ini ${RCAC_SCRATCH}/entap_db/entap_config.ini
 done
 ```
+
+
+::::{tab-set}
+
+:::{tab-item} Percent identity
+
+![pid](assets/figures/pid.png)
+
+**Figure 4: Percent identity of each predicted gene to the reference databases sequences (one hit per query).**
+
+:::
+
+:::{tab-item} Coding frame with gene function  
+
+
+![genefunction](assets/figures/gene-function.png)
+
+**Figure 5: Distribution of frame completeness with presence of gene function across predictions**
+
+:::
+
+:::{tab-item} Coding frame with pfam domain  
+
+
+![pfamdomain](assets/figures/pfam-domain.png)
+
+**Figure 5: Distribution of frame completeness with presence of pfam domains across predictions**
+:::
+
+
+::::
+
+
 
 
 
