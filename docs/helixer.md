@@ -389,20 +389,20 @@ Phylostrata analysis can be used to determine the evolutionary age of the predic
 
 ::::{tab-set}
 
-:::{tab-item} Percent identity
+:::{tab-item} counts 
 
-![ps_counts](![genefunction](assets/figures/ps_counts.png)
+![ps_count](assets/figures/ps_counts.png)
 
-**Figure 6: Percent identity of each predicted gene to the reference databases sequences (one hit per query).**
+**Figure 6: Genes in each starta for the predictions (count)**
 
 :::
 
-:::{tab-item} Coding frame with gene function  
+:::{tab-item} percent  
 
 
 ![ps_percent](assets/figures/ps_percent.png)
 
-**Figure 6: Distribution of frame completeness with presence of gene function across predictions**
+**Figure 7: Genes in each starta for the predictions (percent)**
 
 :::
 
