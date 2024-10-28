@@ -150,7 +150,7 @@ gffread B73-helixer_v1.0.gff3 \
 
 ### A. BUSCO profiling
 
-We will use BUSCO to profile the predicted genes and reference annotations.
+We will use [`BUSCO`](https://busco.ezlab.org/) to profile the predicted genes and reference annotations.
 
 ```bash
 ml biocontainers
@@ -226,7 +226,7 @@ The duplicated genes in B73.v5 (MaizeGDB) should not be interpreted as paralogs.
 
 ### C. Comparing annotations
 
-We will use `mikado` to compare the annotations. Mikado is a tool to compare and merge gene annotations. We will use the `mikado compare` command to compare the annotations. We will filter V5 annotations to only include primary transcripts and only compare protein coding genes.
+We will use [`mikado`](https://mikado.readthedocs.io/en/stable/) to compare the annotations. Mikado is a tool to compare and merge gene annotations. We will use the [`mikado compare`](https://mikado.readthedocs.io/en/stable/Usage/Compare/) command to compare the annotations. We will filter V5 annotations to only include primary transcripts and only compare protein coding genes.
 
 ```bash
 conda activate mikado
@@ -273,7 +273,7 @@ The Helixer predictions missed 7,359 predictions (out of 39,756) that were in B7
 
 B73 has extensive expression data and this can be used to evaluate the gene predictions. If the annotations are accurate, more RNA-seq reads will align within the predicted features, making a higher proportion of assigned reads an indicator of annotation accuracy. Similarly, higher proportions of unassigned reads indicate potential inaccuracies in the annotations, suggesting that important features may be missing or incorrectly predicted.
 
-Expression data for B73 was downloaded from MaizeGDB (as BAM files) and feature assignment was done using `featureCounts` from the `subread` package (both NAM.v5 and Helixer predictions). 
+Expression data for B73 was downloaded from MaizeGDB (as BAM files) and feature assignment was done using [`featureCounts`](https://subread.sourceforge.net/featureCounts.html) from the [`subread`](https://subread.sourceforge.net/) package (both NAM.v5 and Helixer predictions). 
 
 
 ```bash
@@ -328,7 +328,7 @@ something about the plots
 ```
 
 
-### D. Functional annotation
+### E. Functional annotation
 
 The Eukaryotic Non-Model Transcriptome Annotation Pipeline (EnTAP) can be used for functional annotation of the predicted genes. We will use the `entap` pipeline determine proportion of genes with functional annotations in each predictions.
 
@@ -378,11 +378,38 @@ done
 
 ::::
 
-The code used for parsing final `entap_results.tsv` files and generating the plots can be found here: [`parse_subreads.R`](assets/scripts/parse_subreads.R)
+The code used for parsing EnTAP's `entap_results.tsv` files and generating the plots can be found here: [`parse_subreads.R`](assets/scripts/entap_results_plot.R)
 
 ```{note}
 add notes
 ```
+### F. Phylostrata analysis
+
+Phylostrata analysis can be used to determine the evolutionary age of the predicted genes. We will use the `phylostrata` package to determine the phylostrata of the predicted genes.
+
+::::{tab-set}
+
+:::{tab-item} Percent identity
+
+![ps_counts](![genefunction](assets/figures/ps_counts.png)
+
+**Figure 6: Percent identity of each predicted gene to the reference databases sequences (one hit per query).**
+
+:::
+
+:::{tab-item} Coding frame with gene function  
+
+
+![ps_percent](assets/figures/ps_percent.png)
+
+**Figure 6: Distribution of frame completeness with presence of gene function across predictions**
+
+:::
+
+::::
+
+The code used for parsing phylostrata analyses ([`phylostrata_run.R`](assets/scripts/phylostrata_run.R)) and for plotting results ([`phylostrata_plot.R`](assets/scripts/phylostrata_plot.R)) are provided in the repository.
+
 
 
 ## 5. References
