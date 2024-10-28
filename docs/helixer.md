@@ -224,7 +224,7 @@ The Helixer predictions shows higher number of complete BUSCOs (single-copy + du
 The duplicated genes in B73.v5 (MaizeGDB) should not be interpreted as paralogs. Since we did not use just primary transcripts for running BUSCO, the alternative isoforms of the same gene are reported as "duplicated". 
 ```
 
-### C. Comparing annotations
+### B. Comparing annotations
 
 We will use [`mikado`](https://mikado.readthedocs.io/en/stable/) to compare the annotations. Mikado is a tool to compare and merge gene annotations. We will use the [`mikado compare`](https://mikado.readthedocs.io/en/stable/Usage/Compare/) command to compare the annotations. We will filter V5 annotations to only include primary transcripts and only compare protein coding genes.
 
@@ -269,7 +269,7 @@ When compared against each other, the Helixer predictions, at base level, matche
 The Helixer predictions missed 7,359 predictions (out of 39,756) that were in B73.v5, but also predicted 8,306 novel transcripts. Since Helixer does not predict isoforms, the number of genes and transcripts are the same.  
 ```
 
-### D. Feature assignment
+### C. Feature assignment
 
 B73 has extensive expression data and this can be used to evaluate the gene predictions. If the annotations are accurate, more RNA-seq reads will align within the predicted features, making a higher proportion of assigned reads an indicator of annotation accuracy. Similarly, higher proportions of unassigned reads indicate potential inaccuracies in the annotations, suggesting that important features may be missing or incorrectly predicted.
 
@@ -328,7 +328,7 @@ something about the plots
 ```
 
 
-### E. Functional annotation
+### D. Functional annotation
 
 The Eukaryotic Non-Model Transcriptome Annotation Pipeline (EnTAP) can be used for functional annotation of the predicted genes. We will use the `entap` pipeline determine proportion of genes with functional annotations in each predictions.
 
@@ -383,7 +383,7 @@ The code used for parsing EnTAP's `entap_results.tsv` files and generating the p
 ```{note}
 add notes
 ```
-### F. Phylostrata analysis
+### E. Phylostrata analysis
 
 Phylostrata analysis can be used to determine the evolutionary age of the predicted genes. We will use the `phylostrata` package to determine the phylostrata of the predicted genes.
 
