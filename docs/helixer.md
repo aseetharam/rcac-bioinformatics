@@ -324,7 +324,7 @@ featureCounts \
 The code used for parsing `featureCounts` summary files and generating the plots can be found here: [`parse_subreads.R`](assets/scripts/parse_subreads.R)
 
 ```{note}
-something about the plots
+The slightly higher assignment rate for Helixer predictions suggests that the predictions are capturing more coding regions of the genome. Similarly, lower unassigned reads indicate Helixer predictions have better accuracy than current annotations. For differential gene expression studies, higher assignment rates are desirable as they indicate more accurate gene models.
 ```
 
 
@@ -381,7 +381,7 @@ done
 The code used for parsing EnTAP's `entap_results.tsv` files and generating the plots can be found here: [`parse_subreads.R`](assets/scripts/entap_results_plot.R)
 
 ```{note}
-add notes
+The functional annotation results show that the Helixer predictions have higher proportion of genes with functional annotations compared to the reference annotations. Predictions with similairty to existing sequences in the databases are likely to be more accurate than those without any similarity.
 ```
 ### E. Phylostrata analysis
 
@@ -409,6 +409,34 @@ Phylostrata analysis can be used to determine the evolutionary age of the predic
 ::::
 
 The code used for parsing phylostrata analyses ([`phylostrata_run.R`](assets/scripts/phylostrata_run.R)) and for plotting results ([`phylostrata_plot.R`](assets/scripts/phylostrata_plot.R)) are provided in the repository.
+
+```{note}
+The higher proportion of genes in deeply conserved phylostrata (e.g., cellular organisms and eukaryota) underscores Helixer's strength in accurately identifying core, evolutionarily conserved genes. This alignment with conserved regions can be interpreted as strong evidence of the model’s reliability in identifying well-established gene structures.
+```
+
+```{warning}
+Limitations in Novel Gene Identification: The relatively low representation in species-specific phylostrata suggests that Helixer may struggle with genes that are unique or novel to a particular species. This could be due to the lack of specific training data for these novel genes or the limitations of the model in detecting sequences that deviate from conserved gene structures.
+```
+
+## Key Points
+
+
+1. **Helixer’s strength in conserved genes**: Helixer effectively predicts genes in deeply conserved phylostrata, indicating strong performance in identifying core, evolutionarily stable genes across eukaryotic lineages.
+
+2. **Limited novel gene detection**: Helixer shows lower accuracy in detecting species-specific genes, suggesting that identifying novel or rapidly evolving genes may not be its primary strength.
+
+3. **Pre-trained models for versatile Use**: With pre-trained models for various lineages (plants, animals, fungi), Helixer is accessible for multiple research applications without requiring additional RNA-seq or homology data.
+
+4. **Simplicity of Gene Prediction**: Helixer allows for rapid and straightforward gene prediction with a single command, requiring no external data or repeat masking. It can predict genes in complex, highly repetitive genomes like maize in under four hours. This simplicity, combined with easy installation, has the potential to revolutionize gene prediction workflows. 
+
+5. **Ideal for Comparative Genomics**: Helixer’s robust detection of conserved genes makes it a valuable tool for studies focused on comparative genomics and understanding fundamental gene functions.
+
+6. **Potential for Improvement**: The presence of unassigned reads across samples and limited species-specific gene detection highlight areas for future model refinement, possibly with custom training for novel species. 
+
+```{warning}
+Helixer requires GPU for prediction to run efficiently. The prediction time can vary based on the size of the genome and the complexity of the gene structures. 
+```
+
 
 
 
