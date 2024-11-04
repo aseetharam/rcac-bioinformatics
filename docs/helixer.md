@@ -514,6 +514,48 @@ Subcategories include partial hits and fragmented proteins, which may indicate i
 
 ### H. CDS assesments (GC, length, start/stop)
 
+We can use `bioawk` get relavant stats on the CDS sequences predicted by Helixer and compare them with the reference annotations.
+
+```bash
+for f in *_cds.fa; do
+    bioawk -c fastx 'BEGIN{OFS="\t"}{
+    print $name,length($seq),gc($seq),substr($seq,0,3),reverse(substr(reverse($seq),0,3))
+    }' $f > ${f%.*}.info;
+done
+```
+
+The plots were generated using the following R script: [`cds_assesment.R`](assets/scripts/cds_assesment.R)
+
+::::{tab-set}
+
+:::{tab-item} CDS length
+
+![cds length](assets/figures/cds-length.png)
+
+Figure 8: Distribution of CDS length for Helixer and NAM.v5 predictions. The Helixer predictions have a lower proportion of shorter CDS lengths compared to NAM.v5 annotations.
+
+:::
+
+
+:::{tab-item} GC content
+
+![GC content](assets/figures/gc-content.png)
+
+Figure 9: Distribution of GC content for Helixer and NAM.v5 predictions. Both predictions have a classic dual GC peak typical to grasses.
+
+:::
+
+
+:::{tab-item} Codon type
+
+![codon type](assets/figures/codon-type.png)
+
+Figure 10: Distribution of start and stop codons for Helixer and NAM.v5 predictions. The Helixer predictions have a higher proportion of valid start and stop codons.
+
+:::
+
+::::
+
 
 
 ## Key Points
