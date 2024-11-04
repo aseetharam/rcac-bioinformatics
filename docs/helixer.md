@@ -418,6 +418,16 @@ The higher proportion of genes in deeply conserved phylostrata (e.g., cellular o
 Limitations in Novel Gene Identification: The relatively low representation in species-specific phylostrata suggests that Helixer may struggle with genes that are unique or novel to a particular species. This could be due to the lack of specific training data for these novel genes or the limitations of the model in detecting sequences that deviate from conserved gene structures.
 ```
 
+### F. GFF3 stats comparison
+
+
+### G. OMArk proteome assesment
+
+
+### H. CDS assesments (GC, length, start/stop)
+
+
+
 ## Key Points
 
 
