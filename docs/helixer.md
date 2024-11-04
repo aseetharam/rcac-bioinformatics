@@ -423,6 +423,93 @@ Limitations in Novel Gene Identification: The relatively low representation in s
 
 ### G. OMArk proteome assesment
 
+[`OMArk`](https://github.com/DessimozLab/OMArk) provides measures of proteome completeness, characterizes the consistency of all protein coding genes with regard to their homologs, and identifies the presence of contamination from other species
+
+
+::::{tab-set}
+
+:::{tab-item} OMArk for NAM.v5
+
+```bash
+omark_sif="${RCAC_SCRATCH}/omark/omark_0.3.0--pyh7cba7a3_0.sif"
+peptide="${RCAC_SCRATCH}/omark/Zm-B73-REFERENCE-NAM-5.0_Zm00001eb.1.protein.fa"
+database="${RCAC_SCRATCH}/omark/LUCA.h5"
+apptainer exec ${omark_sif} omamer search \
+    --db ${database} \
+    --query ${peptide} \
+    --out ${peptide%.*}.omamer \
+    --nthreads ${SLURM_CPUS_ON_NODE}
+# only needed for NAM.v5
+grep ">" ${peptide} |\
+    sed 's/>//g' |\
+    awk -F_ '{a[$1] = a[$1] ? a[$1]","$0 : $0} END {for (i in a) print a[i]}' > ${peptide%.*}.splice
+apptainer exec ${omark_sif} omark \
+    --file ${peptide%.*}.omamer \
+    --database ${database} \
+    --outputFolder ${peptide%.*} \
+    --og_fasta ${peptide} \
+    --isoform_file ${peptide%.*}.splice
+```
+
+:::
+
+:::{tab-item} OMArk for Helixer
+
+```bash
+omark_sif="${RCAC_SCRATCH}/omark/omark_0.3.0--pyh7cba7a3_0.sif"
+peptide="${RCAC_SCRATCH}/omark/helixer_pep.fa"
+database="${RCAC_SCRATCH}/omark/LUCA.h5"
+apptainer exec ${omark_sif} omamer search \
+    --db ${database} \
+    --query ${peptide} \
+    --out ${peptide%.*}.omamer \
+    --nthreads ${SLURM_CPUS_ON_NODE}
+apptainer exec ${omark_sif} omark \
+    --file ${peptide%.*}.omamer \
+    --database ${database} \
+    --outputFolder ${peptide%.*} \
+    --og_fasta ${peptide} \
+    --isoform_file ${peptide%.*}.splice
+```
+
+:::
+
+::::
+
+Table 4: Conserved HOGs analysis for completeness assessment of gene sets in Helixer and NAM.v5
+This table provides a completeness assessment of the gene sets for both Helixer and NAM.v5 based on conserved Hierarchical Orthologous Groups (HOGs) within the Panicoideae clade. 
+The categories include the number of single-copy genes, duplicated genes, and missing genes, with a distinction between expected and unexpected duplications. 
+The assessment serves as a proxy for evaluating the gene repertoire completeness and duplication events in each dataset.
+
+| Category               | Helixer Count | Helixer (%) | NAM.v5 Count | NAM.v5 (%) |
+|------------------------|---------------|-------------|--------------|------------|
+| Single                 | 13,072        | 63.75%      | 9,150        | 44.62%     |
+| Duplicated             | 5,874         | 28.65%      | 2,240        | 10.92%     |
+| Duplicated, Unexpected | 2,150         | 10.49%      | 990          | 4.83%      |
+| Duplicated, Expected   | 3,724         | 18.16%      | 1,250        | 6.10%      |
+| Missing                | 1,559         | 7.60%       | 9,115        | 44.45%     |
+| **Total HOGs**         | 20,505        | 100.00%     | 20,505       | 100.00%    |
+
+
+Table 5: Consistency assessment of annotated protein-coding genes in Helixer and NAM.v5 proteomes.
+This table presents the consistency assessment of annotated protein-coding genes within the Helixer and NAM.v5 proteomes.
+The categories evaluate gene placements as "Consistent" with the ancestral lineage, "Inconsistent" (potential misannotations), "Contaminants" (genes from other lineages), and "Unknown" (unmatched genes).
+Subcategories include partial hits and fragmented proteins, which may indicate issues with gene models, annotation, or sequence integrity.
+
+| Category                      | Helixer Count | Helixer (%) | NAM.v5 Count | NAM.v5 (%) |
+|-------------------------------|---------------|-------------|--------------|------------|
+| **Total Proteins**            | 41,923        | 100.00%     | 39,756       | 100.00%    |
+| **Consistent**                | 38,997        | 93.02%      | 20,208       | 50.83%     |
+| _Consistent, partial hits_    | 5,412         | 12.91%      | 3,541        | 8.91%      |
+| _Consistent, fragmented_      | 3,094         | 7.38%       | 2,627        | 6.61%      |
+| **Inconsistent**              | 757           | 1.81%       | 1,910        | 4.80%      |
+| _Inconsistent, partial hits_  | 291           | 0.69%       | 335          | 0.84%      |
+| _Inconsistent, fragmented_    | 279           | 0.67%       | 921          | 2.32%      |
+| **Contaminants**              | 0             | 0.00%       | 0            | 0.00%      |
+| _Contaminants, partial hits_  | 0             | 0.00%       | 0            | 0.00%      |
+| _Contaminants, fragmented_   | 0             | 0.00%       | 0            | 0.00%      |
+| **Unknown**                   | 2,169         | 5.17%       | 17,638       | 44.37%     |
+
 
 ### H. CDS assesments (GC, length, start/stop)
 
@@ -462,3 +549,8 @@ bioRxiv. 2023 Feb 06: 2023.02.06.527280.  Preprint. (not been certified by peer 
 - Stiehler F, Steinborn M, Scholz S, Dey D, Weber APM, Denton AK
 Helixer: cross-species gene annotation of large eukaryotic genomes using deep learning.
 Bioinformatics. 2020 Dec, 36(22-23): 5291-5298.
+
+
+
+
+
