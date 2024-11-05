@@ -420,6 +420,22 @@ Limitations in Novel Gene Identification: The relatively low representation in s
 
 ### F. GFF3 stats comparison
 
+You can generate comprehensive statistics for the GFF3 files using the `agat_sp_statistics.pl` script from the `agat` package. 
+
+```bash
+ml biocontainers
+ml agat
+agat_sp_statistics.pl \
+    -g B73-helixer_v1.0.gff3 \
+    -o B73-helixer_v1.0.stats
+agat_sp_statistics.pl \
+    -g Zm-B73-REFERENCE-NAM-5.0.gff3 \
+    -o Zm-B73-REFERENCE-NAM-5.0.stats
+```
+
+The statistics can be compared to identify differences in the gene predictions.
+
+
 
 ### G. OMArk proteome assesment
 
