@@ -62,6 +62,8 @@ species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 
 :::{tab-item} Case 1 
 
+#### With genome only (no external evidence)
+
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
 | Genome                    | B73.v5 (softmasked)             |
@@ -70,10 +72,24 @@ species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 | Long-read data            | None                            |
 | Pretrained species model  | None                            |
 
+```bash
+mkdir -p ${workdir}
+apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
+        --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
+        --GENEMARK_PATH=${GENEMARK_PATH} \
+        --genome=${genome} \
+        --esmode \
+        --species=Zm_$(date +"%Y%m%d").3b \
+        --workingdir=${workdir} \
+        --gff3 \
+        --threads ${SLURM_CPUS_ON_NODE}
+```
 
 :::
 
 :::{tab-item} Case 2 
+
+#### With RNA-Seq data (minimal evidence)
 
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
@@ -87,6 +103,8 @@ species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 
 :::{tab-item} Case 3
 
+#### With RNA-Seq data (full evidence)
+
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
 | Genome                    | B73.v5 (softmasked)             |
@@ -98,6 +116,8 @@ species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 :::
 
 :::{tab-item} Case 4 
+
+#### With protein sequences
 
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
@@ -112,6 +132,8 @@ species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 
 :::{tab-item} Case 5 
 
+#### With RNA-Seq data and protein sequences
+
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
 | Genome                    | B73.v5 (softmasked)             |
@@ -125,6 +147,8 @@ species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 
 :::{tab-item} Case 6 
 
+#### With pretrained species model ("Maize")
+
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
 | Genome                    | B73.v5 (softmasked)             |
@@ -136,6 +160,8 @@ species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 :::
 
 :::{tab-item} Case 7 
+
+#### With Iso-Seq data and conserved protein sequences
 
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
@@ -149,7 +175,9 @@ species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 
 :::
 
-:::{tab-item} Case 8 
+:::{tab-item} Case 8
+
+#### With Iso-Seq data and RNA-Seq data
 
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
