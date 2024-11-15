@@ -55,3 +55,38 @@ workdir=${PWD}/$(basename ${genome%.*})_genomeOnly
 species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 ```
 
+::::{tab-set}
+
+:::{tab-item} Scenario 1 
+
+:::
+
+:::{tab-item} Scenario 2 
+
+:::
+
+:::{tab-item} Scenario 3
+
+:::
+
+:::{tab-item} Scenario 4 
+
+:::
+
+:::{tab-item} Scenario 5 
+
+:::
+
+:::{tab-item} Scenario 6 
+
+:::
+
+:::{tab-item} Scenario 7 
+
+:::
+
+:::{tab-item} Scenario 8 
+
+:::
+
+::::
