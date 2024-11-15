@@ -7,7 +7,7 @@ BRAKER3 is a pipeline that combines GeneMark-ET and AUGUSTUS to predict genes in
 | Genome                    | ✔️      | ✔️     | ✔️     | ✔️     | ✔️     | ✔️     | ✔️     | ✔️   |
 | RNA-Seq                   | ❌      | ✔️<sup>*</sup>     | ✔️     | ❌     | ✔️     | ❌     | ❌     | ✔️   |
 | Iso-Seq                   | ❌      | ❌     | ❌     | ❌     | ❌     | ❌     | ✔️     | ✔️   |
-| Conserved proteins        | ❌      | ❌     | ❌     | ✔️     | ✔️     | ❌     | ✔️     | ❌   |
+| Conserved proteins        | ❌      | ❌     | ❌     | ✔️     | ✔️     | ❌     | ✔️     | ✔️   |
 | Pretrained species model  | ❌      | ❌     | ❌     | ❌     | ❌     | ✔️     | ❌     | ❌   |
 
 <sup>*</sup> minimal RNA-Seq data (one library/one tissue)
@@ -81,6 +81,7 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
         --GENEMARK_PATH=${GENEMARK_PATH} \
         --genome=${genome} \
         --esmode \
+        --genome=${genome} \
         --species=Zm_$(date +"%Y%m%d").c1 \
         --workingdir=${workdir} \
         --gff3 \
@@ -107,9 +108,9 @@ mkdir -p ${workdir}
 apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
         --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
         --GENEMARK_PATH=${GENEMARK_PATH} \
-        --genome=${genome} \
         --rnaseq_sets_ids=B73_V11_middle_MN01042 \
         --rnaseq_sets_dirs=${RCAC_SCRATCH}/RNAseq/ \
+        --genome=${genome} \
         --species=Zm_$(date +"%Y%m%d").c2 \
         --workingdir=${workdir} \
         --gff3 \
@@ -137,9 +138,10 @@ mkdir -p ${workdir}
 apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
         --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
         --GENEMARK_PATH=${GENEMARK_PATH} \
-        --genome=${genome} \
         --rnaseq_sets_ids=${rnaseq_sets_ids} \
         --rnaseq_sets_dirs=${RCAC_SCRATCH}/rnaseq/ \
+        --genome=${genome} \
+        --species=Zm_$(date +"%Y%m%d").c3 \
         --workingdir=${workdir} \
         --gff3 \
         --threads ${SLURM_CPUS_ON_NODE}
@@ -178,6 +180,7 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
         --species=Zm_$(date +"%Y%m%d").1a \
         --prot_seq=${proteins} \
         --genome=${genome} \
+        --species=Zm_$(date +"%Y%m%d").c4 \
         --workingdir=${workdir} \
         --gff3 \
         --threads ${SLURM_CPUS_ON_NODE}
@@ -201,11 +204,11 @@ mkdir -p ${workdir}
 apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
         --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
         --GENEMARK_PATH=${GENEMARK_PATH} \
-        --species=Zm_$(date +"%Y%m%d").c5 \
         --rnaseq_sets_ids=${rnaseq_sets_ids} \
         --rnaseq_sets_dirs=${RCAC_SCRATCH}/rnaseq/ \
         --prot_seq=${proteins} \
         --genome=${genome} \
+        --species=Zm_$(date +"%Y%m%d").c5 \
         --workingdir=${workdir} \
         --gff3 \
         --threads ${SLURM_CPUS_ON_NODE}
@@ -230,9 +233,9 @@ mkdir -p ${workdir}
 apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
         --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
         --GENEMARK_PATH=${GENEMARK_PATH} \
+        --skipAllTraining \
         --genome=${genome} \
         --species=maize5 \
-        --skipAllTraining \
         --workingdir=${workdir} \
         --gff3 \
         --threads ${SLURM_CPUS_ON_NODE}
@@ -287,10 +290,10 @@ isoseq="/scratch/negishi/aseethar/isoseq/isoseq_sorted.bam"
 apptainer exec --bind /scratch/negishi/aseethar ${BRAKER_SIF} braker.pl \
         --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
         --GENEMARK_PATH=${GENEMARK_PATH} \
-        --species=Zm_$(date +"%Y%m%d").3 \
         --prot_seq=${proteins} \
         –-bam=${isoseq} \
         --genome=${genome} \
+        --species=Zm_$(date +"%Y%m%d").c7 \
         --workingdir=${workdir} \
         --gff3 \
         --threads ${SLURM_CPUS_ON_NODE}
@@ -309,6 +312,20 @@ apptainer exec --bind /scratch/negishi/aseethar ${BRAKER_SIF} braker.pl \
 | Protein sequences         | Viridiplantae protein sequences |
 | Long-read data            | Iso-Seq data                    |
 | Pretrained species model  | None                            |
+
+To run this, you need to first run **case 3** (full-RNAseq data) [BRAKER-1] and **case 5** (conserved proteins data) [BRAKER-2]. You will also need the Iso-Seq BAM file generated in **case 7**.
+
+The steps are as follows:
+
+1. Run BRAKER using the spliced alignments of short-read RNA-seq (here **case 3** with full-RNAseq data) [BRAKER-1]
+2. Run BRAKER using the conserved proteins data (here **case 5** with conserved proteins data) [BRAKER-2]
+3. Run GeneMarkS-T protocol on the Iso-Seq data to predict protein-coding regions in the transcripts
+    - map the long reads to the genome using minimap2
+    - convert the SAM file to sorted BAM file
+    - collapse redundant isoforms
+    - predict protein-coding regions using GeneMarkS-T
+4. Run the long read version of TSEBRA to combine the three gene sets using all extrinsic evidence
+
 
 ```bash
 tbd
