@@ -57,7 +57,7 @@ species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 
 ::::{tab-set}
 
-:::{tab-item} ### Scenario 1
+:::{tab-item} Scenario 1
 
 **Only input genome without any external evidence datasets**
 
@@ -211,23 +211,3 @@ xyz
 ::::
 
 
-
-
-::::{tab-set}
-
-:::{tab-item} counts 
-
-
-**Figure 6: Genes in each starta for the predictions (count)**
-
-:::
-
-:::{tab-item} percent  
-
-
-
-**Figure 7: Genes in each starta for the predictions (percent)**
-
-:::
-
-::::
