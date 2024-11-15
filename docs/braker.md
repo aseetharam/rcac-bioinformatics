@@ -62,7 +62,7 @@ species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 
 :::{tab-item} Case 1 
 
-#### With genome only (no external evidence)
+**With genome only (no external evidence)**
 
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
@@ -79,7 +79,7 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
         --GENEMARK_PATH=${GENEMARK_PATH} \
         --genome=${genome} \
         --esmode \
-        --species=Zm_$(date +"%Y%m%d").3b \
+        --species=Zm_$(date +"%Y%m%d").c1 \
         --workingdir=${workdir} \
         --gff3 \
         --threads ${SLURM_CPUS_ON_NODE}
@@ -89,7 +89,7 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
 
 :::{tab-item} Case 2 
 
-#### With RNA-Seq data (minimal evidence)
+**with minimal RNA-Seq data (one library/one tissue)**
 
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
@@ -99,11 +99,27 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
 | Long-read data            | None                            |
 | Pretrained species model  | None                            |
 
+
+```bash
+mkdir -p ${workdir}
+apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
+        --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
+        --GENEMARK_PATH=${GENEMARK_PATH} \
+        --genome=${genome} \
+        --rnaseq_sets_ids=B73_V11_middle_MN01042 \
+        --rnaseq_sets_dirs=${RCAC_SCRATCH}/RNAseq/ \
+        --species=Zm_$(date +"%Y%m%d").c2 \
+        --workingdir=${workdir} \
+        --gff3 \
+        --threads ${SLURM_CPUS_ON_NODE}
+```
+
+
 :::
 
 :::{tab-item} Case 3
 
-#### With RNA-Seq data (full evidence)
+**with exhaustive RNA-Seq data (11 tissues)**
 
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
@@ -113,11 +129,25 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
 | Long-read data            | None                            |
 | Pretrained species model  | None                            |
 
+```bash
+rna_seq_sets_ids="B73_8DAS_root_MN01011,B73_8DAS_root_MN01012,B73_8DAS_shoot_MN01021,B73_8DAS_shoot_MN01022,B73_16DAP_embryo_MN01101,B73_16DAP_embryo_MN01102,B73_16DAP_endosperm_MN01091,B73_16DAP_endosperm_MN01092,,B73_R1_anther_MN01081,B73_R1_anther_MN01082,B73_R1_anther_MNA1081,B73_V11_base_MN01031,B73_V11_base_MN01032,B73_V11_middle_MN01041,B73_V11_middle_MN01042,B73_V11_middle_MN01043,B73_V11_tip_MN01051,B73_V11_tip_MN01052,B73_V18_ear_MN01071,B73_V18_ear_MN01072,B73_V18_tassel_MN01061,B73_V18_tassel_MN01062"
+mkdir -p ${workdir}
+apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
+        --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
+        --GENEMARK_PATH=${GENEMARK_PATH} \
+        --genome=${genome} \
+        --rnaseq_sets_ids=${rnaseq_sets_ids} \
+        --rnaseq_sets_dirs=${RCAC_SCRATCH}/rnaseq/ \
+        --workingdir=${workdir} \
+        --gff3 \
+        --threads ${SLURM_CPUS_ON_NODE}
+```
+
 :::
 
 :::{tab-item} Case 4 
 
-#### With protein sequences
+**with conserved protein sequences**
 
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
@@ -127,12 +157,34 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
 | Long-read data            | None                            |
 | Pretrained species model  | None                            |
 
+Using the [orthodb-clades](https://github.com/tomasbruna/orthodb-clades) tool, we can download protein sequences for a specific clade. In this scenario, since we are using the Maize genome, we can download the `clade` specific `Viridiplantae.fa`  [OrthoDB v12](https://www.orthodb.org/) protein sets.
 
+```bash
+git clone git@github.com:tomasbruna/orthodb-clades.git
+ml biocontainers
+ml snakemake
+snakemake --cores ${SLURM_CPUS_ON_NODE} 
+```
+
+When this is done, you should see a folder named `clade` with `Viridiplantae.fa` in the `orthodb-clades` directory. We will use this as one of the input datasets for BRAKER3. The following command will run BRAKER3 with the input genome and protein sequences:
+
+```bash
+protein_sequences="${RCAC_SCRATCH}/braker/orthodb-clades/clade/Viridiplantae.fa"
+apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
+        --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
+        --GENEMARK_PATH=${GENEMARK_PATH} \
+        --species=Zm_$(date +"%Y%m%d").1a \
+        --prot_seq=${proteins} \
+        --genome=${genome} \
+        --workingdir=${workdir} \
+        --gff3 \
+        --threads ${SLURM_CPUS_ON_NODE}
+```
 :::
 
 :::{tab-item} Case 5 
 
-#### With RNA-Seq data and protein sequences
+**with RNA-Seq and conserved protein sequences**
 
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
@@ -142,12 +194,26 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
 | Long-read data            | None                            |
 | Pretrained species model  | None                            |
 
+```bash
+mkdir -p ${workdir}
+apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
+        --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
+        --GENEMARK_PATH=${GENEMARK_PATH} \
+        --species=Zm_$(date +"%Y%m%d").c5 \
+        --rnaseq_sets_ids=${rnaseq_sets_ids} \
+        --rnaseq_sets_dirs=${RCAC_SCRATCH}/rnaseq/ \
+        --prot_seq=${proteins} \
+        --genome=${genome} \
+        --workingdir=${workdir} \
+        --gff3 \
+        --threads ${SLURM_CPUS_ON_NODE}
+```
 
 :::
 
 :::{tab-item} Case 6 
 
-#### With pretrained species model ("Maize")
+**with pretrained species model ("Maize")**
 
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
@@ -157,11 +223,24 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
 | Long-read data            | None                            |
 | Pretrained species model  | "Maize"                         |
 
+```bash
+mkdir -p ${workdir}
+apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
+        --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
+        --GENEMARK_PATH=${GENEMARK_PATH} \
+        --genome=${genome} \
+        --species=maize5 \
+        --skipAllTraining \
+        --workingdir=${workdir} \
+        --gff3 \
+        --threads ${SLURM_CPUS_ON_NODE}
+```
+
 :::
 
 :::{tab-item} Case 7 
 
-#### With Iso-Seq data and conserved protein sequences
+**with Iso-Seq and conserved protein sequences**
 
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
@@ -171,23 +250,67 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
 | Long-read data            | Iso-Seq data                    |
 | Pretrained species model  | None                            |
 
+For IsoSeq data, we need to provide the sorted BAM file as input. The data was downloaded from the [ENA database](https://www.pacb.com)
 
+
+```bash
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR326/004/ERR3261694/ERR3261692_subreads.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR326/004/ERR3261694/ERR3261693_subreads.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR326/004/ERR3261694/ERR3261694_subreads.fastq.gz
+cat ERR3261692_subreads.fastq.gz \
+        ERR3261693_subreads.fastq.gz \
+        ERR3261694_subreads.fastq.gz > maize_isoseq.fastq.gz
+genome="${RCAC_SCRATCH/Zm-B73-REFERENCE-NAM-5.0_softmasked.fa}"
+ml biocontainers
+ml minimap2
+ml samtools
+threads=${SLURM_CPUS_ON_NODE}
+minimap2 \
+        -t${threads} \
+        -ax splice:hq \
+        -uf ${genome} \
+        maize_isoseq.fastq.gz > isoseq.sam
+samtools view \
+        -bS \
+        --threads ${threads} \
+        isoseq.sam -o isoseq.bam
+samtools sort \
+        --threads ${threads} \
+        -o isoseq_sorted.bam isoseq.bam
+```
+
+
+```bash
+isoseq="/scratch/negishi/aseethar/isoseq/isoseq_sorted.bam"
+apptainer exec --bind /scratch/negishi/aseethar ${BRAKER_SIF} braker.pl \
+        --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
+        --GENEMARK_PATH=${GENEMARK_PATH} \
+        --species=Zm_$(date +"%Y%m%d").3 \
+        --prot_seq=${proteins} \
+        –-bam=${isoseq} \
+        --genome=${genome} \
+        --workingdir=${workdir} \
+        --gff3 \
+        --threads ${SLURM_CPUS_ON_NODE}
+```
 
 :::
 
 :::{tab-item} Case 8
 
-#### With Iso-Seq data and RNA-Seq data
+**with Iso-Seq, RNA-Seq and conserved protein sequences**
 
 | Input                     | Type                            |
 |---------------------------|---------------------------------|
 | Genome                    | B73.v5 (softmasked)             |
 | RNA-Seq data              | RNAseq (11 tissues)             |
-| Protein sequences         | None                            |
+| Protein sequences         | Viridiplantae protein sequences |
 | Long-read data            | Iso-Seq data                    |
 | Pretrained species model  | None                            |
 
-
+```bash
+tbd
+```
 :::
 
 ::::
