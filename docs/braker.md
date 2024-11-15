@@ -60,88 +60,105 @@ species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 
 ::::{tab-set}
 
-:::{tab-item} Scenario 1 
+:::{tab-item} Case 1 
 
-**Genome**: B73.v5 (softmasked)
-**RNA-Seq data**: None
-**Protein sequences**: None
-**Long-read data**: None
-**Pretrained species model**: None
-
-
-:::
-
-:::{tab-item} Scenario 2 
-
-**Genome**: B73.v5 (softmasked)
-**RNA-Seq data**: B73 RNA-Seq data
-**Protein sequences**: None
-**Long-read data**: None
-**Pretrained species model**: None
-
-:::
-
-:::{tab-item} Scenario 3
-
-**Genome**: B73.v5 (softmasked)
-**RNA-Seq data**: B73 RNA-Seq data
-**Protein sequences**: None
-**Long-read data**: None
-**Pretrained species model**: None
-
-:::
-
-:::{tab-item} Scenario 4 
-
-**Genome**: B73.v5 (softmasked)
-**RNA-Seq data**: None
-**Protein sequences**: Viridiplantae protein sequences
-**Long-read data**: None
-**Pretrained species model**: None
+| Input                     | Type                            |
+|---------------------------|---------------------------------|
+| Genome                    | B73.v5 (softmasked)             |
+| RNA-Seq data              | None                            |
+| Protein sequences         | None                            |
+| Long-read data            | None                            |
+| Pretrained species model  | None                            |
 
 
 :::
 
-:::{tab-item} Scenario 5 
+:::{tab-item} Case 2 
 
-**Genome**: B73.v5 (softmasked)
-**RNA-Seq data**: B73 RNA-Seq data
-**Protein sequences**: Viridiplantae protein sequences
-**Long-read data**: None
-**Pretrained species model**: None
+| Input                     | Type                            |
+|---------------------------|---------------------------------|
+| Genome                    | B73.v5 (softmasked)             |
+| RNA-Seq data              | RNAseq (single library)         |
+| Protein sequences         | None                            |
+| Long-read data            | None                            |
+| Pretrained species model  | None                            |
+
+:::
+
+:::{tab-item} Case 3
+
+| Input                     | Type                            |
+|---------------------------|---------------------------------|
+| Genome                    | B73.v5 (softmasked)             |
+| RNA-Seq data              | RNAseq (11 tissues)             |
+| Protein sequences         | None                            |
+| Long-read data            | None                            |
+| Pretrained species model  | None                            |
+
+:::
+
+:::{tab-item} Case 4 
+
+| Input                     | Type                            |
+|---------------------------|---------------------------------|
+| Genome                    | B73.v5 (softmasked)             |
+| RNA-Seq data              | None                            |
+| Protein sequences         | Viridiplantae protein sequences |
+| Long-read data            | None                            |
+| Pretrained species model  | None                            |
 
 
 :::
 
-:::{tab-item} Scenario 6 
+:::{tab-item} Case 5 
 
-**Genome**: B73.v5 (softmasked)
-**RNA-Seq data**: None
-**Protein sequences**: None
-**Long-read data**: None
-**Pretrained species model**: "Maize"
-
-:::
-
-:::{tab-item} Scenario 7 
-
-**Genome**: B73.v5 (softmasked)
-**RNA-Seq data**: None
-**Protein sequences**: Viridiplantae protein sequences
-**Long-read data**: Iso-Seq data
-**Pretrained species model**: None
-
+| Input                     | Type                            |
+|---------------------------|---------------------------------|
+| Genome                    | B73.v5 (softmasked)             |
+| RNA-Seq data              | RNAseq (11 tissues)             |
+| Protein sequences         | Viridiplantae protein sequences |
+| Long-read data            | None                            |
+| Pretrained species model  | None                            |
 
 
 :::
 
-:::{tab-item} Scenario 8 
+:::{tab-item} Case 6 
 
-**Genome**: B73.v5 (softmasked)
-**RNA-Seq data**: B73 RNA-Seq data
-**Protein sequences**: Viridiplantae protein sequences
-**Long-read data**: Iso-Seq data
-**Pretrained species model**: None
+| Input                     | Type                            |
+|---------------------------|---------------------------------|
+| Genome                    | B73.v5 (softmasked)             |
+| RNA-Seq data              | None                            |
+| Protein sequences         | None                            |
+| Long-read data            | None                            |
+| Pretrained species model  | "Maize"                         |
+
+:::
+
+:::{tab-item} Case 7 
+
+| Input                     | Type                            |
+|---------------------------|---------------------------------|
+| Genome                    | B73.v5 (softmasked)             |
+| RNA-Seq data              | None                            |
+| Protein sequences         | Viridiplantae protein sequences |
+| Long-read data            | Iso-Seq data                    |
+| Pretrained species model  | None                            |
+
+
+
+:::
+
+:::{tab-item} Case 8 
+
+| Input                     | Type                            |
+|---------------------------|---------------------------------|
+| Genome                    | B73.v5 (softmasked)             |
+| RNA-Seq data              | RNAseq (11 tissues)             |
+| Protein sequences         | None                            |
+| Long-read data            | Iso-Seq data                    |
+| Pretrained species model  | None                            |
+
 
 :::
 
