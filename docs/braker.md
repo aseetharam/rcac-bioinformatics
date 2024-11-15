@@ -55,37 +55,93 @@ workdir=${PWD}/$(basename ${genome%.*})_genomeOnly
 species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
 ```
 
+
+### Input datasets
+
 ::::{tab-set}
 
 :::{tab-item} Scenario 1 
+
+**Genome**: B73.v5 (softmasked)
+**RNA-Seq data**: None
+**Protein sequences**: None
+**Long-read data**: None
+**Pretrained species model**: None
+
 
 :::
 
 :::{tab-item} Scenario 2 
 
+**Genome**: B73.v5 (softmasked)
+**RNA-Seq data**: B73 RNA-Seq data
+**Protein sequences**: None
+**Long-read data**: None
+**Pretrained species model**: None
+
 :::
 
 :::{tab-item} Scenario 3
+
+**Genome**: B73.v5 (softmasked)
+**RNA-Seq data**: B73 RNA-Seq data
+**Protein sequences**: None
+**Long-read data**: None
+**Pretrained species model**: None
 
 :::
 
 :::{tab-item} Scenario 4 
 
+**Genome**: B73.v5 (softmasked)
+**RNA-Seq data**: None
+**Protein sequences**: Viridiplantae protein sequences
+**Long-read data**: None
+**Pretrained species model**: None
+
+
 :::
 
 :::{tab-item} Scenario 5 
+
+**Genome**: B73.v5 (softmasked)
+**RNA-Seq data**: B73 RNA-Seq data
+**Protein sequences**: Viridiplantae protein sequences
+**Long-read data**: None
+**Pretrained species model**: None
+
 
 :::
 
 :::{tab-item} Scenario 6 
 
+**Genome**: B73.v5 (softmasked)
+**RNA-Seq data**: None
+**Protein sequences**: None
+**Long-read data**: None
+**Pretrained species model**: "Maize"
+
 :::
 
 :::{tab-item} Scenario 7 
 
+**Genome**: B73.v5 (softmasked)
+**RNA-Seq data**: None
+**Protein sequences**: Viridiplantae protein sequences
+**Long-read data**: Iso-Seq data
+**Pretrained species model**: None
+
+
+
 :::
 
 :::{tab-item} Scenario 8 
+
+**Genome**: B73.v5 (softmasked)
+**RNA-Seq data**: B73 RNA-Seq data
+**Protein sequences**: Viridiplantae protein sequences
+**Long-read data**: Iso-Seq data
+**Pretrained species model**: None
 
 :::
 
