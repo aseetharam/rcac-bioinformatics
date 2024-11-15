@@ -78,7 +78,7 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
 
 :::
 
-:::{tab-item} ### Scenario 2
+:::{tab-item} Scenario 2
 
 **Scenario 2: Input genome with RNA-Seq data (minimal evidence)**
 
@@ -98,7 +98,7 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
 
 :::
 
-:::{tab-item} ### Scenario 3
+:::{tab-item} Scenario 3
 
 **Input genome with RNA-Seq data (full evidence)**
 
@@ -147,7 +147,7 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
 
 :::
 
-:::{tab-item} ### Scenario 5
+:::{tab-item} Scenario 5
 
 **Input genome with RNA-Seq data and protein sequences**
 
@@ -169,7 +169,7 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
 
 :::
 
-:::{tab-item} ### Scenario 6
+:::{tab-item} Scenario 6
 
 **Input genome with pretrained species model**
 
@@ -190,7 +190,7 @@ apptainer exec --bind /scratch/negishi/aseethar ${BRAKER_SIF} braker.pl \
 
 :::
 
-:::{tab-item} ### Scenario 7
+:::{tab-item} Scenario 7
 
 **Input genome with Iso-Seq data and protein sequences**
 
@@ -202,7 +202,7 @@ In this final scenario, we will predict genes in a Maize genome using the input 
 
 :::
 
-:::{tab-item}### Scenario 8
+:::{tab-item Scenario 8
 
 xyz
 
