@@ -5,10 +5,12 @@ BRAKER3 is a pipeline that combines GeneMark-ET and AUGUSTUS to predict genes in
 | Input Type                | Case 1  | Case 2 | Case 3 | Case 4 | Case 5 | Case 6 | Case 7 | Case 8 |
 |---------------------------|---------|--------|--------|--------|--------|--------|--------|--------|
 | Genome                    | ✔️      | ✔️     | ✔️     | ✔️     | ✔️     | ✔️     | ✔️     | ✔️   |
-| RNA-Seq                   | ❌      | ✔️     | ✔️     | ❌     | ✔️     | ❌     | ❌     | ✔️   |
+| RNA-Seq                   | ❌      | ✔️<sup>*</sup>     | ✔️     | ❌     | ✔️     | ❌     | ❌     | ✔️   |
 | Iso-Seq                   | ❌      | ❌     | ❌     | ❌     | ❌     | ❌     | ✔️     | ✔️   |
 | Conserved proteins        | ❌      | ❌     | ❌     | ✔️     | ✔️     | ❌     | ✔️     | ❌   |
 | Pretrained species model  | ❌      | ❌     | ❌     | ❌     | ❌     | ✔️     | ❌     | ❌   |
+
+<sup>*</sup> minimal RNA-Seq data (one library/one tissue)
 
 
 ## Installation
