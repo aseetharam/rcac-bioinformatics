@@ -204,6 +204,29 @@ In this final scenario, we will predict genes in a Maize genome using the input 
 
 :::{tab-item}### Scenario 8
 
+xyz
+
+:::
+
+::::
+
+
+
+
+::::{tab-set}
+
+:::{tab-item} counts 
+
+
+**Figure 6: Genes in each starta for the predictions (count)**
+
+:::
+
+:::{tab-item} percent  
+
+
+
+**Figure 7: Genes in each starta for the predictions (percent)**
 
 :::
 
