@@ -53,8 +53,7 @@ BRAKER_SIF="${RCAC_SCRATCH}/braker/braker3.sif"
 AUGUSTUS_CONFIG_PATH="${RCAC_SCRATCH}/braker/augustus_config"
 GENEMARK_PATH="/opt/ETP/bin/gmes"
 genome="${RCAC_SCRATCH}/braker/Zm-B73-REFERENCE-NAM-5.0_softmasked.fa"
-workdir=${PWD}/$(basename ${genome%.*})_genomeOnly
-species="$(basename ${genome%.*}).$(date +"%Y%m%d")"
+workdir=${PWD}/$(basename ${genome%.*})_braker
 ```
 
 
@@ -79,7 +78,6 @@ mkdir -p ${workdir}
 apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
         --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
         --GENEMARK_PATH=${GENEMARK_PATH} \
-        --genome=${genome} \
         --esmode \
         --genome=${genome} \
         --species=Zm_$(date +"%Y%m%d").c1 \
@@ -255,39 +253,58 @@ apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
 | Long-read data            | Iso-Seq data                    |
 | Pretrained species model  | None                            |
 
-For IsoSeq data, we need to provide the sorted BAM file as input. The data was downloaded from the [ENA database](https://www.pacb.com)
+The IsoSeq data for maize (B73) was obtained from the publication [PMC7028979](https://pmc.ncbi.nlm.nih.gov/articles/PMC7028979/) and is available in the ENA BioProject [PRJEB32007](https://www.ebi.ac.uk/ena/browser/view/PRJEB32007). 
+To proceed, you will need the original files listed in the `Submitted files: FTP` column of the BioProject page. We will download the data (`.bam` files) and process them using the `isoseq3` tool to demultiplex and map the reads to the B73 reference genome. 
+The primers and adapters required for demultiplexing were sourced from the original publication (Supplementary Table 1).
 
 
 ```bash
-wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR326/004/ERR3261694/ERR3261692_subreads.fastq.gz
-wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR326/004/ERR3261694/ERR3261693_subreads.fastq.gz
-wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR326/004/ERR3261694/ERR3261694_subreads.fastq.gz
-cat ERR3261692_subreads.fastq.gz \
-        ERR3261693_subreads.fastq.gz \
-        ERR3261694_subreads.fastq.gz > maize_isoseq.fastq.gz
-genome="${RCAC_SCRATCH/Zm-B73-REFERENCE-NAM-5.0_softmasked.fa}"
+ml purge
+ml anaconda
+conda activate isoseq
+for input in *subreads.bam; do
+base=$(basename ${input} |sed 's/.subreads.bam//g')
+# convert subreads to ccs
+ccs ${input} ${base}.ccs.bam --skip-polish --min-passes 1
+# demultiplex
+lima ${base}.ccs.bam primer.fasta ${base}_lima.bam --isoseq --dump-clips
+done
+# move the files to separate directories
+for f in B73 Ki11 Ki11xB73 B73xKi11; do
+mkdir -p $f;
+mv *_${f}_* ./${f}/;
+done
+cd B73
+# merge the files
+ls *.bam > input.fofn
+ml purge
 ml biocontainers
+ml bamtools samtools
+bamtools merge -list input.fofn -out merged_B73.bam
+# convert bam to fastq
+samtools fastq --threads ${SLURM_CPUS_ON_NODE} -o merged_B73.fastq merged_B73.bam
 ml minimap2
-ml samtools
-threads=${SLURM_CPUS_ON_NODE}
 minimap2 \
-        -t${threads} \
+        -t ${SLURM_CPUS_ON_NODE}\
         -ax splice:hq \
         -uf ${genome} \
-        maize_isoseq.fastq.gz > isoseq.sam
+        merged_B73.fastq > isoseq_B73.sam
 samtools view \
         -bS \
         --threads ${threads} \
-        isoseq.sam -o isoseq.bam
+        -o isoseq.bam \
+        isoseq_b73.sam \
 samtools sort \
         --threads ${threads} \
-        -o isoseq_sorted.bam isoseq.bam
+        -o isoseq_sorted.bam \
+        isoseq.bam
 ```
-
+We will need `isoseq_sorted.bam` (and `merged_B73.fastq`) for the **case 8** as well.
+For this **case 7**, we only need `isoseq_sorted.bam`. To setup BRAKER3 with the Iso-Seq data and conserved protein sequences:
 
 ```bash
-isoseq="/scratch/negishi/aseethar/isoseq/isoseq_sorted.bam"
-apptainer exec --bind /scratch/negishi/aseethar ${BRAKER_SIF} braker.pl \
+isoseq="${RCAC_SCRATCH}/isoseq/isoseq_sorted.bam"
+apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} braker.pl \
         --AUGUSTUS_CONFIG_PATH=${AUGUSTUS_CONFIG_PATH} \
         --GENEMARK_PATH=${GENEMARK_PATH} \
         --prot_seq=${proteins} \
@@ -317,19 +334,71 @@ To run this, you need to first run **case 3** (full-RNAseq data) [BRAKER-1] and 
 
 The steps are as follows:
 
-1. Run BRAKER using the spliced alignments of short-read RNA-seq (here **case 3** with full-RNAseq data) [BRAKER-1]
-2. Run BRAKER using the conserved proteins data (here **case 5** with conserved proteins data) [BRAKER-2]
-3. Run GeneMarkS-T protocol on the Iso-Seq data to predict protein-coding regions in the transcripts
-    - map the long reads to the genome using minimap2
-    - convert the SAM file to sorted BAM file
+1. Run `BRAKER` using the spliced alignments of short-read RNA-seq (here **case 3** with full-RNAseq data).
+2. Run `BRAKER` using the conserved proteins data (here **case 5** with conserved proteins data).
+3. Run `GeneMarkS-T` protocol on the Iso-Seq data to predict protein-coding regions in the transcripts:
+    - map the long reads to the genome using minimap2 (here **case 7** `isoseq_sorted.bam`)
     - collapse redundant isoforms
-    - predict protein-coding regions using GeneMarkS-T
-4. Run the long read version of TSEBRA to combine the three gene sets using all extrinsic evidence
+    - predict protein-coding regions using `GeneMarkS-T`
+4. Run the long read version of `TSEBRA` to combine the three gene sets using all extrinsic evidence
 
+Since we have already run **case 3** and **case 5**, we will proceed with the remaining steps.
 
 ```bash
-tbd
+collapse_isoforms_by_sam.py \
+        --input merged.fastq \
+        --fq \
+        -b isoseq_sorted.bam \
+        -o isoseq_sorted \
+        --dun-merge-5-shorter \
+        --cpus ${SLURM_CPUS_ON_NODE}
+stringtie2fa.py \
+        -g ${genome} \
+        -f isoseq_sorted.collapsed.gff \
+        -o cupcake.fa
+
+gmst.pl \
+        --strand direct \
+        cupcake.fa.mrna \
+        --output gmst.out \
+        --format GFF
+git clone https://github.com/Gaius-Augustus/BRAKER
+cd BRAKER && \
+   git checkout long-reads && \
+   cd ..
+BRAKER/scripts/gmst2globalCoords.py \
+        -t isoseq_sorted.collapsed.gff \
+        -p gmst.out \
+        -o gmst.global.gtf \
+        -g ${genome}
 ```
+
+We will need the `hintsfile.gff` and `augustus.hints.gtf` files from **case 3** and **case 5**. 
+We will also need the `gmst.global.gtf` file generated from the `GeneMarkS-T` protocol.
+ The following command will run `TSEBRA` to combine the three gene sets:
+
+```bash
+ln -s ${RCAC_SCRATCH}/braker/case3/Augustus/augustus.hints.gtf braker1.augustus.hints.gtf
+ln -s ${RCAC_SCRATCH}/braker/case5/Augustus/augustus.hints.gtf braker2.augustus.hints.gtf
+ln -s ${RCAC_SCRATCH}/braker/case3/hintsfile.gff braker1.hintsfile.gff
+ln -s ${RCAC_SCRATCH}/braker/case5/hintsfile.gff braker2.hintsfile.gff
+ln -s ${RCAC_SCRATCH}/braker/case7/genemark_st/gmst.global.gtf
+git clone https://github.com/Gaius-Augustus/TSEBRA
+cd TSEBRA
+git checkout long-reads
+apptainer exec --bind ${RCAC_SCRATCH} ${BRAKER_SIF} ./TSEBRA/bin/tsebra.py \
+        -g braker1.augustus.hints.gtf,braker2.augustus.hints.gtf \
+        -e braker1.hintsfile.gff,braker2.hintsfile.gff \
+        -l gmst.global.gtf \
+        -c ./TSEBRA/config/long_reads.cfg \
+        -o tsebra.gtf
+ml purge
+ml biocontainers
+ml cufflinks
+gffread tsebra.gtf \
+        -g ${genome} \
+        -y  tsebra_pep.fa \
+        -x  tsebra_cds.fa
 :::
 
 ::::
