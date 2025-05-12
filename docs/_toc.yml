@@ -11,6 +11,7 @@ parts:
   - file: mitohifi
   - file: hifi_assembly
   - file: helixer
+  - file: juicer.md 
 #  - file: notebooks
 #  - file: markdown-notebooks
 #- caption: Cool extensions 😎
