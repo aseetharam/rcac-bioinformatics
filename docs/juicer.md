@@ -2,8 +2,8 @@
 
 Juicer is a pipeline for analyzing Hi-C data, including alignment, filtering, deduplication, and generation of `.hic` contact matrices. On Negishi, Juicer runs using a Singularity container with all required dependencies pre-installed (BWA, SAMtools, Java, etc.).
 
-```{note}
-The Negishi cluster does not have GPUs. HiCCUPS (loop calling) is automatically disabled in this installation. Arrowhead and other CPU-based steps will still run normally. If you want loop calling, please run (`mustache`)[https://github.com/ay-lab/mustache], instead.
+```{warning}
+The Negishi cluster does not have GPUs. HiCCUPS (loop calling) is configured to run on CPUs in this installation. Arrowhead and other CPU-based steps will still run normally (provided if you provide motifs). There are better/faster alternatives like (`mustache`)[https://github.com/ay-lab/mustache], which you can run on the `.hic` files post Juicer.
 ```
 
 
