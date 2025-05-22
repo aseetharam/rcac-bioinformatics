@@ -11,7 +11,8 @@ parts:
   - file: mitohifi
   - file: hifi_assembly
   - file: helixer
-  - file: juicer.md 
+  - file: juicer.md
+  - file: icommands
 #  - file: notebooks
 #  - file: markdown-notebooks
 #- caption: Cool extensions 😎
@@ -20,4 +21,3 @@ parts:
 #  - file: sphinx-examples
 #  - file: sphinx-hoverxref
 #  - file: sphinx-proof
-
