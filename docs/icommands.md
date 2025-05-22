@@ -42,7 +42,7 @@ Enter your CyVerse password when prompted. The password is not displayed (you wo
 
 If successful, this creates or updates a configuration file (usually at `~/.irods/irods_environment.json`), enabling seamless use of other iCommands.
 
-```{warning}
+```{note}
 If you don’t have a CyVerse account, register at [https://user.cyverse.org/](https://user.cyverse.org/)
 ```
 
