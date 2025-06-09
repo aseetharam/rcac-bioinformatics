@@ -20,7 +20,7 @@ Once the job is allocated, you'll be automatically connected to a compute node. 
 You can also do `echo $SLURM_JOB_NODELIST` to see the node name.
 
 
-## 2. Load the modules and start the VISPR Server
+## 2. Load the modules and start the VISPR server
 
 Next, load the required software modules and navigate to the directory containing your MAGeCK-VISPR results.
 
@@ -44,7 +44,7 @@ The session should remain active and should not display any errors. Warning mess
 ```
 
 
-## 3. Forward the Port to your local computer
+## 3. Forward the port to your local computer
 
 To view the web interface, you need to create an SSH tunnel from the compute node to your local machine.
 
@@ -69,7 +69,7 @@ ssh -f -N -L 5000:localhost:5000 -J pete@negishi.rcac.purdue.edu pete@a409.negis
 You will be asked to enter your password for the HPC login node (or use the ssh-key if you have set it up). Since you will likely be connecting to the compute node for the very first time you will also be asked to confirm the authenticity of the host. Type "yes" to continue.
 ```
 
-## 4. View the VISPR Interface
+## 4. View the VISPR interface
 After successfully establishing the SSH tunnel, you can now access the VISPR web interface from your local machine.
 
 Open a web browser and navigate to:
