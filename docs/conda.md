@@ -1,42 +1,95 @@
-# Inroduction to Conda for Bioinformatics
+# Conda for bioinformatics
 
-**Conda** is a powerful package and environment management system that simplifies the installation of software and their dependencies, especially in scientific computing. For bioinformatics users, where tools often rely on specific versions of Python, R, or C libraries, Conda helps avoid version conflicts and makes it easier to set up reproducible workflows.
+Conda simplifies installing and managing bioinformatics software and dependencies, especially on shared systems like HPC clusters. It allows users to create isolated environments without requiring admin rights. This avoids conflicts between packages and ensures reproducibility.
 
-### Key Features:
+## Initial setup
 
-* 📦 **Package manager**: Installs software from community-maintained repositories like [Bioconda](https://bioconda.github.io/) and [conda-forge](https://conda-forge.org/).
-* 🧪 **Environment manager**: Creates isolated environments for different projects, so dependencies don’t interfere with each other.
-* 🔁 **Cross-platform**: Works the same way on Linux, macOS, and Windows.
-* 📚 **Language agnostic**: Handles packages written in Python, R, C/C++, Java, and more.
-
----
-
-### Why Bioinformaticians Use Conda:
-
-1. **Avoid "dependency hell"**
-   Tools like STAR, BWA, Salmon, or DESeq2 may require different library versions. Conda avoids global installs and keeps environments clean.
-
-2. **Reproducibility**
-   Conda lets you export the exact versions of every package in a project into a `.yml` file, so anyone can recreate your environment exactly.
-
-3. **Easy installation of bioinformatics tools**
-   Thousands of tools are available through Bioconda, which is specifically designed for life sciences software.
-
-4. **No root access needed**
-   Perfect for running on shared HPC systems (e.g., SLURM clusters) where you can't install packages system-wide.
-
----
-
-### Real-World Example:
-
-Let’s say you're starting an RNA-seq project and need `fastqc`, `trimmomatic`, and `salmon`. With Conda:
+First, load the anaconda module:
 
 ```bash
-conda create -n rnaseq fastqc trimmomatic salmon
+ml anaconda
 ```
 
-Now you have everything installed in one place. No need to compile anything, no risk of breaking your system’s Python or R installation.
+Since home directories have limited space, store environments in `/depot`:
 
----
+```bash
+mkdir -p /depot/proejct/username/conda_envs
+conda config --add envs_dirs /depot/proejct/username/conda_envs
+```
 
-Would you like a graphic or table showing how Conda fits into the software stack for bioinformatics (e.g., shell → conda → environment → tool execution)?
+(Optional) Speed up downloads by disabling SSL verification (only if needed):
+
+```bash
+conda config --set ssl_verify no
+```
+
+## Create and activate an environment
+
+Example: create an environment for aligners
+
+```bash
+conda create -y -n aligners bwa hisat2 star
+conda activate aligners
+```
+
+This installs `bwa`, `hisat2`, and `star` in an isolated environment named `aligners`.
+
+## Install packages later
+
+To add more tools later:
+
+```bash
+ml anaconda
+conda activate aligners
+conda install samtools
+```
+
+You can also install from specific channels if needed:
+
+```bash
+conda install -c bioconda -c conda-forge fastqc
+```
+
+## List and manage environments
+
+List all environments:
+
+```bash
+conda env list
+```
+
+Remove an environment:
+
+```bash
+conda remove -n aligners --all
+```
+
+Export environment configuration:
+
+```bash
+conda env export > aligners.yaml
+```
+
+Recreate from config:
+
+```bash
+conda env create -f aligners.yaml
+```
+
+## Best practices
+
+* Always activate the environment before running tools.
+* Avoid installing too many unrelated packages in one environment.
+* Use `bioconda` and `conda-forge` channels for most bioinformatics tools.
+* Keep environments in `/depot` or other high-capacity paths.
+
+## Example workflow summary
+
+```bash
+ml anaconda
+mkdir -p /depot/$USER/conda_envs
+conda config --add envs_dirs /depot/$USER/conda_envs
+conda create -y -n aligners bwa hisat2 star
+conda activate aligners
+```
+
