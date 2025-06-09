@@ -13,6 +13,7 @@ parts:
   - file: helixer
   - file: juicer.md
   - file: icommands
+  - file: vispr
 #  - file: notebooks
 #  - file: markdown-notebooks
 #- caption: Cool extensions 😎
