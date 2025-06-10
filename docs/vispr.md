@@ -39,7 +39,7 @@ apptainer exec /apps/biocontainers/images/quay.io_biocontainers_mageck-vispr\:0.
 
 The server will start and indicate it's running on a specific port, usually `5000`. **Leave this terminal running.**
 
-```{note}
+```{warning}
 The session should remain active and should not display any errors. Warning messages are normal, but if you see errors, please check the module versions or your input files.
 ```
 
@@ -65,7 +65,7 @@ If your job is on node `a409`, the server is on port `5000`, your username is `p
 ssh -f -N -L 5000:localhost:5000 -J pete@negishi.rcac.purdue.edu pete@a409.negishi.rcac.purdue.edu
 ```
 
-```{warning}
+```{note}
 You will be asked to enter your password for the HPC login node (or use the `ssh-key` if you have set it up and login without any prompt). Since you will likely be connecting to the compute node for the very first time you will also be asked to confirm the authenticity of the host. Type "yes" to continue.
 ```
 
