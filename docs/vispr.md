@@ -66,7 +66,7 @@ ssh -f -N -L 5000:localhost:5000 -J pete@negishi.rcac.purdue.edu pete@a409.negis
 ```
 
 ```{warning}
-You will be asked to enter your password for the HPC login node (or use the ssh-key if you have set it up). Since you will likely be connecting to the compute node for the very first time you will also be asked to confirm the authenticity of the host. Type "yes" to continue.
+You will be asked to enter your password for the HPC login node (or use the `ssh-key` if you have set it up and login without any prompt). Since you will likely be connecting to the compute node for the very first time you will also be asked to confirm the authenticity of the host. Type "yes" to continue.
 ```
 
 ## 4. View the VISPR interface
