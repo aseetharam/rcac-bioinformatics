@@ -53,10 +53,15 @@ The server will start and indicate it's running on a specific port, `45511`. **L
 ```{warning}
 The session should remain active and should not display any errors. Warning messages are normal, but if you see errors, please check the module versions or your input files.
 ```
+
+
 ```{dropdown} Click here to see an example output
 
-```{code-block} bash
-$ apptainer exec /apps/biocontainers/images/quay.io_biocontainers_mageck-vispr\:0.5.6--py_0.sif vispr server --port 45511 results/*.yaml
+Above command will output something like this:
+
+```bash
+$ apptainer exec /apps/biocontainers/images/quay.io_biocontainers_mageck-vispr\:0.5.6--py_0.sif \
+vispr server --port 45511 results/*.yaml
 Loading data.
   config = yaml.load(f)
 Starting server.
