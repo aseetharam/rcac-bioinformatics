@@ -59,7 +59,9 @@ The session should remain active and should not display any errors. Warning mess
 
 Above command will output something like this:
 
-```
+```{code-block} bash
+:caption: Terminal session
+:linenos:
 $ apptainer exec /apps/biocontainers/images/quay.io_biocontainers_mageck-vispr\:0.5.6--py_0.sif \
 vispr server --port 45511 results/*.yaml
 Loading data.
@@ -76,6 +78,8 @@ Close: hit Ctrl-C in this terminal.
  * Debug mode: off
 
 ```
+```
+
 
 
 
