@@ -9,7 +9,6 @@
 - MAGeCK output files (`.vispr.yaml`)
 - RCAC HPC account
 - Personal computer with terminal access
-+++
 :::
 
 
