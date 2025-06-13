@@ -1,7 +1,5 @@
 # VISPR visualization
 
-> 
-
 
 :::{card} 
 🛠️ **Prerequisites**
