@@ -103,3 +103,98 @@ This is a container with a custom CSS class.
 
 - It can contain multiple blocks
 :::
+
+
+
+:::{card} Card Title
+Header
+^^^
+Card content
++++
+Footer
+:::
+
+
+
+::::{tab-set}
+
+:::{tab-item} Label1
+Content 1
+:::
+
+:::{tab-item} Label2
+Content 2
+:::
+
+::::
+
+
+
+:::{table} Table caption
+:widths: auto
+:align: center
+
+| foo | bar |
+| --- | --- |
+| baz | bim |
+:::
+
+
+
+```{list-table} Frozen Delights!
+:widths: 15 10 30
+:header-rows: 1
+
+*   - Treat
+    - Quantity
+    - Description
+*   - Albatross
+    - 2.99
+    - On a stick!
+*   - Crunchy Frog
+    - 1.49
+    - If we took the bones out, it wouldn't be
+ crunchy, now would it?
+*   - Gannet Ripple
+    - 1.99
+    - On a stick!
+```
+
+:::{list-table} Frozen Delights!
+:widths: 15 10 30
+:header-rows: 1
+
+*   - Treat
+    - Quantity
+    - Description
+*   - Albatross
+    - 2.99
+    - On a stick!
+*   - Crunchy Frog
+    - 1.49
+    - If we took the bones out, it wouldn't be
+ crunchy, now would it?
+*   - Gannet Ripple
+    - 1.99
+    - On a stick!
+:::
+
+
+
+```{csv-table} Frozen Delights!
+:header: >
+:    "Treat", "Quantity", "Description"
+:widths: 15, 10, 30
+
+"Albatross", 2.99, "On a stick!"
+"Crunchy Frog", 1.49, "If we took the bones out, it wouldn't be crunchy, now would it?"
+"Gannet Ripple", 1.99, "On a stick!"
+```
+
+
+{lineno-start=1 emphasize-lines="2,3"}
+```python
+a = 1
+b = 2
+c = 3
+```
