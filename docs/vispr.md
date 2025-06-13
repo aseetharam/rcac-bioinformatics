@@ -55,7 +55,7 @@ The session should remain active and should not display any errors. Warning mess
 ```
 
 
-:::{dropdown} Click here to see an example output
+::::{dropdown} Click here to see an example output
 
 Above command will output something like this:
 
@@ -77,7 +77,7 @@ Close: hit Ctrl-C in this terminal.
  * Debug mode: off
 
 ```
-:::
+::::
 
 
 
@@ -88,7 +88,7 @@ To view the web interface, you need to create an SSH tunnel from the compute nod
 
 Open a **new, second terminal** on your local computer and run the following command.
 
-```{warning}
+```{important}
 This command must be run from your local machine, not the HPC node. For Windows users, you can use PowerShell or a WSL terminal that supports SSH. For Mac and Linux users, the terminal should work as is.
 ```
 
