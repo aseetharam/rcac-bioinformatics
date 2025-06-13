@@ -59,7 +59,7 @@ The session should remain active and should not display any errors. Warning mess
 
 Above command will output something like this:
 
-```bash
+```
 $ apptainer exec /apps/biocontainers/images/quay.io_biocontainers_mageck-vispr\:0.5.6--py_0.sif \
 vispr server --port 45511 results/*.yaml
 Loading data.
@@ -74,9 +74,10 @@ Close: hit Ctrl-C in this terminal.
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
  * Debug mode: off
-```
 
 ```
+
+
 
 
 ## 3. Forward the port to your local computer
