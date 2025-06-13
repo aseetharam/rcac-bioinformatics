@@ -55,7 +55,7 @@ The session should remain active and should not display any errors. Warning mess
 ```
 
 
-```{dropdown} Click here to see an example output
+:::{dropdown} Click here to see an example output
 
 Above command will output something like this:
 
@@ -77,8 +77,7 @@ Close: hit Ctrl-C in this terminal.
  * Debug mode: off
 
 ```
-```
-```
+:::
 
 
 
