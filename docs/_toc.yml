@@ -4,17 +4,24 @@
 format: jb-book
 root: intro
 parts:
-- caption: Tutorials 
+- caption: Tips 
   chapters:
   - file: trinity
+
+- caption: Guides 
+  chapters:
   - file: r-packages
+  - file: icommands
+  - file: vispr
+
+- caption: Advanced workflows
+  chapters:
   - file: mitohifi
   - file: hifi_assembly
   - file: helixer
-  - file: juicer.md
-  - file: icommands
-  - file: vispr
-  - file: conda
+  - file: juicer
+
+#  - file: conda
 #  - file: notebooks
 #  - file: markdown-notebooks
 #- caption: Cool extensions 😎
