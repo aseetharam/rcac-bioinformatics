@@ -1,9 +1,16 @@
-# MAGeCK-VISPR visualization guide
+# VISPR visualization
 
-> 🛠️ **Prerequisites**
-> - MAGeCK-VISPR output files (`.vispr.yaml`)
-> - An RCAC HPC account
-> - SSH access and basic terminal familiarity
+> 
+
+
+:::{card} 
+🛠️ **Prerequisites**
+^^^
+- MAGeCK output files (`.vispr.yaml`)
+- RCAC HPC account
+- Personal computer with terminal access
++++
+:::
 
 
 MAGeCK-VISPR is a comprehensive quality control, analysis, and visualization workflow for CRISPR/Cas9 screens. This guide provides a straightforward method for running the visualization component on an HPC cluster and viewing the results on your local machine.
