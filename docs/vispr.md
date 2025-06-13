@@ -95,6 +95,12 @@ Open a **new, second terminal** on your local computer and run the following com
 This command must be run from your local machine, not the HPC node. For Windows users, you can use PowerShell or a WSL terminal that supports SSH. For Mac and Linux users, the terminal should work as is.
 :::
 
+```{admonition} Use local terminal!
+:class: important
+
+This command must be run from your local machine, not the HPC node. For Windows users, you can use PowerShell or a WSL terminal that supports SSH. For Mac and Linux users, the terminal should work as is.
+```
+
 
 ```bash
 # Replace <node_name> with the name of the node from step 1 (e.g., a446.negishi.rcac.purdue.edu)
