@@ -78,7 +78,6 @@ Close: hit Ctrl-C in this terminal.
 
 ```
 ```
-test
 ```
 
 
