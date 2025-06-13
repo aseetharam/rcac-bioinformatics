@@ -97,7 +97,9 @@ Open a **new, second terminal** on your local computer and run the following com
 ```{admonition} 💻 Use your local terminal
 :class: important
 
-**This SSH tunnel command must be run from your local machine**, not the HPC node. - ✅ **Windows**: Use PowerShell or WSL with SSH support.
+**This SSH tunnel command must be run from your local machine**, not the HPC node.
+
+- ✅ **Windows**: Use PowerShell or WSL with SSH support.
 - ✅ **macOS/Linux**: Use the default terminal.
 ```
 
@@ -149,6 +151,13 @@ After successfully establishing the SSH tunnel, you can now access the VISPR web
 http://localhost:8788
 ```
 
-(Replace `8788` with the local port number you used for forwarding). 🧩 You should now see the **interactive VISPR dashboard** rendered locally!
+```{attention}
+Replace `8788` with the local port number you used for forwarding
+```
+
+
+🧩 You should now see the **interactive VISPR dashboard** rendered locally!
+
 
 ![VISPR interface](assets/figures/vispr_vispr-interface.png)
+Figure 2: VISPR interface loaded in a web browser
