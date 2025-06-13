@@ -192,9 +192,32 @@ Content 2
 ```
 
 
-{lineno-start=1 emphasize-lines="2,3"}
-```python
+
+
+```{code-block} python
+:caption: This is a caption
+:emphasize-lines: 2,3
+:lineno-start: 1
+
 a = 1
 b = 2
 c = 3
 ```
+
+
+```{literalinclude} assets/scripts/example.py
+```
+
+
+
+Since Pythagoras, we know that {math}`a^2 + b^2 = c^2`.
+
+```{math}
+:label: mymath
+(a + b)^2 = a^2 + 2ab + b^2
+
+(a + b)^2  &=  (a + b)(a + b) \\
+           &=  a^2 + 2ab + b^2
+```
+
+The equation {eq}`mymath` is a quadratic equation.
