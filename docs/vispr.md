@@ -1,5 +1,11 @@
 # MAGeCK-VISPR visualization guide
 
+> 🛠️ **Prerequisites**
+> - MAGeCK-VISPR output files (`.vispr.yaml`)
+> - An RCAC HPC account
+> - SSH access and basic terminal familiarity
+
+
 MAGeCK-VISPR is a comprehensive quality control, analysis, and visualization workflow for CRISPR/Cas9 screens. This guide provides a straightforward method for running the visualization component on an HPC cluster and viewing the results on your local machine.
 
 ## 1. Connect to HPC and start an interactive session
@@ -55,7 +61,7 @@ The session should remain active and should not display any errors. Warning mess
 ```
 
 
-```{dropdown} Click here to see an example output
+```{dropdown} 🔍 Click to see example server output
 
 Above command will output something like this:
 
@@ -88,10 +94,13 @@ To view the web interface, you need to create an SSH tunnel from the compute nod
 Open a **new, second terminal** on your local computer and run the following command.
 
 
-```{admonition} Use local terminal!
+```{admonition} 💻 Use your local terminal
 :class: important
 
-This command must be run from your local machine, not the HPC node. Windows users (>10), you can use PowerShell or a WSL terminal that supports SSH. For Mac and Linux users, the native terminal should work as is.
+**This SSH tunnel command must be run from your local machine**, not the HPC node.
+
+- ✅ **Windows**: Use PowerShell or WSL with SSH support.
+- ✅ **macOS/Linux**: Use the default terminal.
 ```
 
 
@@ -125,23 +134,30 @@ The following table explains the components of the SSH command used to tunnel po
 
 | Option | Description |
 |--------|-------------|
-| `-f` | Forks the SSH process to the background after the connection is established. Useful for tunnels. |
-| `-N` | Does not execute any remote command; used when forwarding ports only. |
-| `-L 8788:localhost:45511` | Forwards local port 8788 to port 45511 on the remote machine (`a446`) through the tunnel. Format: `local_port:remote_host:remote_port`. |
-| `-J pete@negishi.rcac.purdue.edu` | Uses `negishi` as a **jump host** to reach the target server (`a446`). |
-| `pete@a446.negishi.rcac.purdue.edu` | The final destination host where the port-forwarded service is running. |
+| `-f` | 🧵 Forks SSH to the background (ideal for port forwarding). |
+| `-N` | 🛑 Tells SSH not to run remote commands (just tunnel). |
+| `-L 8788:localhost:45511` | 🔁 Forwards local port to the remote compute node port. |
+| `-J pete@negishi.rcac.purdue.edu` | 🪜 Jump host (Negishi login node). |
+| `pete@a446.negishi.rcac.purdue.edu` | 🎯 Target compute node running the server. |
 
 
 
 ## 4. View the VISPR interface
 After successfully establishing the SSH tunnel, you can now access the VISPR web interface from your local machine.
 
-Open a web browser and navigate to:
+🌐 **Open a browser** and go to:
 
 ```
 http://localhost:8788
 ```
 
-(Replace `8788` with the local port number you used for forwarding). You should now see the interactive VISPR interface.
+```{attention}
+Replace `8788` with the local port number you used for forwarding
+```
+
+
+🧩 You should now see the **interactive VISPR dashboard** rendered locally!
+
 
 ![VISPR interface](assets/figures/vispr_vispr-interface.png)
+Figure 2: VISPR interface loaded in a web browser
