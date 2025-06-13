@@ -73,3 +73,16 @@ sphinx:
     - sphinx_examples
     - hoverxref.extension
 
+parse:
+  myst_enable_extensions:
+    - colon_fence
+    - deflist
+    - html_admonition
+    - html_image
+    - linkify
+    - replacements
+    - smartquotes
+    - substitution
+    - tasklist
+    - dropdown
+
