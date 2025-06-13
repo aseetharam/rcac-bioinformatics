@@ -100,7 +100,7 @@ You will be asked to enter your password for the HPC login node (or use the `ssh
 ```
 
 
-![PowerShellTerminal](https://github.com/user-attachments/assets/025a4396-7208-4ba8-8d63-864ad5835605)
+![PowerShellTerminal](assets/figures/vispr_powershell-terminal.png)
 
 Figure 1: SSH tunnel command output (local PowerShell terminal is being used here)
 
@@ -129,4 +129,4 @@ http://localhost:8788
 
 (Replace `8788` with the local port number you used for forwarding). You should now see the interactive VISPR interface.
 
-![VISPR interface](https://github.com/user-attachments/assets/70a1de25-1e26-494e-945b-63ba91a58e58)
+![VISPR interface](assets/figures/vispr_vispr-interface.png)
