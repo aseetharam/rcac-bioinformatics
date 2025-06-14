@@ -20,6 +20,7 @@ parts:
   - file: hifi_assembly
   - file: helixer
   - file: juicer
+  - file: gemoma
 
 #  - file: conda
 #  - file: notebooks
