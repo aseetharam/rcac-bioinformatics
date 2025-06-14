@@ -18,8 +18,8 @@ First, open a terminal on your local computer and connect to the HPC cluster. Th
 
 ```bash
 # Connect to a Purdue RCAC HPC cluster (e.g., Negishi)
-ssh your_username@negishi.rcac.purdue.edu
-
+ssh purdue.pete@negishi.rcac.purdue.edu
+# where `purdue.pete` is your username
 # Request an interactive node with 8 cores for 4 hours
 # Replace "your_account" with your specific account/allocation name
 salloc -N 1 -n 8 -t 4:00:00 -A your_account
@@ -112,7 +112,7 @@ Open a **new, second terminal** on your local computer and run the following com
 # Replace <node_name> with the name of the node from step 1 (e.g., a446.negishi.rcac.purdue.edu)
 # Replace <port> with the port number from the server output (e.g., 45511)
 # Replace <your_username> and <hpc_login_node> with your details
-ssh -L <port>:localhost:<port> -J <your_username>@<hpc_login_node> <your_username>@<node_name>
+ssh -L <local-port>:localhost:<remote-port> -J <username>@<hpc-hostname-> <your_username>@<node_name>
 ```
 
 **Example:**
