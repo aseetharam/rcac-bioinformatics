@@ -81,35 +81,67 @@ gunzip Sorghum_bicolor.Sorghum_bicolor_NCBIv3.gff3.gz
 
 GeMoMa is executed using a Java-based CLI pipeline. Here we will run GeMoMa with the target genome, Helixer predictions, and homology-based annotations from related species. We will generate a merged annotation file in GFF3 format.
 
+We will install GeMoMa using BioConda:
 
 ```bash
-wget https://www.jstacs.de/downloads/GeMoMa-1.9.zip
-unzip GeMoMa-1.9.zip
-gemoma=$(realpath GeMoMa-1.9.jar)
+module --force purge
+module load conda
+conda create -n gemoma  # Press 'y' when prompted
+conda activate gemoma
+conda install -c bioconda gemoma
+
 ```
-The path to the GeMoMa jar (`/scratch/negishi/aseethar/maize_gemoma/GeMoMa-1.9.jar`) file will be used in the next step.
+After installation, the GeMoMa JAR file is located under the environment’s shared directory. You can set the path like this:
+
+```bash
+gemoma_jar="${CONDA_ENVS_PATH}/share/gemoma-1.9-0/GeMoMa-1.9.jar"
+```
+
 
 ## 🛠️ Run GeMoMa
 
 ```bash
-genome=$(realpath Zm-B73-REFERENCE-NAM-5.0.fa)
-sorghumFa=$(realpath Sorghum_bicolor.Sorghum_bicolor_NCBIv3.dna.toplevel.fa)
-sorghumGFF=$(realpath Sorghum_bicolor.Sorghum_bicolor_NCBIv3.gff3)
-maize1=$(realpath Zm-B97-REFERENCE-NAM-1.0.fa)
-maize1GFF3=$(realpath Zm-B97-REFERENCE-NAM-1.0_Zm00018ab.1.gff3)
-helixer=$(realpath helixer_B73.gff3)
+#!/bin/bash
+# activate conda environment
+module --force purge
+module load conda
+conda activate gemoma
+# Set GeMoMa JAR path
+gemoma_jar="${CONDA_ENVS_PATH}/share/gemoma-1.9-0/GeMoMa-1.9.jar"
+
+# Function to check file existence and resolve full path
+check_file() {
+    if [[ ! -f "$1" ]]; then
+        echo "ERROR: File not found: $1" >&2
+        exit 1
+    fi
+    realpath "$1"
+}
+
+# Check and assign input files
+genome=$(check_file Zm-B73-REFERENCE-NAM-5.0.fa)
+sorghumFa=$(check_file Sorghum_bicolor.Sorghum_bicolor_NCBIv3.dna.toplevel.fa)
+sorghumGFF=$(check_file Sorghum_bicolor.Sorghum_bicolor_NCBIv3.gff3)
+maize1=$(check_file Zm-B97-REFERENCE-NAM-1.0.fa)
+maize1GFF3=$(check_file Zm-B97-REFERENCE-NAM-1.0_Zm00018ab.1.gff3)
+helixer=$(check_file Zm-B73-HELIXER-NAM-1.0.gff3)
+
+# Other config
 name="B73_v5_GeMoMa"
 cpus=${SLURM_CPUS_ON_NODE:-8}
 dir="gemoma_output"
-java -Xms100g -Xmx200g -Djava.io.tmpdir=$TMPDIR -jar ${gemoma} CLI GeMoMaPipeline \
+
+# Run GeMoMa
+java -Xms100g -Xmx200g -Djava.io.tmpdir=$TMPDIR -jar ${gemoma_jar} CLI GeMoMaPipeline \
     t=$genome \
-    s=own i=sb a=${sorghumGFF} g=${sorghumFa} \
-    s=own i=zm a=${maize1GFF3} g=${maize1} \
-    ID=helixer e=$helixer  \
-    AnnotationFinalizer.u= \
-    AnnotationFinalizer.r=SIMPLE AnnotationFinalizer.p=${name} \
+    s=own i=sb a=$sorghumGFF g=$sorghumFa \
+    s=own i=zm a=$maize1GFF3 g=$maize1 \
+    ID=helixer e=$helixer \
+    AnnotationFinalizer.u=NO \
+    AnnotationFinalizer.r=SIMPLE AnnotationFinalizer.p=$name \
     AnnotationFinalizer.n=true \
-    sc=false o=false p=true pc=true pgr=false threads=$cpus outdir=${dir}
+    sc=false o=false p=true pc=true pgr=false \
+    threads=$cpus outdir=$dir
 ```
 
 The options used in the command above are:
@@ -137,6 +169,13 @@ The options used in the command above are:
 | `pgr=false`                    | Do not output predicted genomic regions.                                     |
 | `threads=$cpus`                | Number of compute threads to use.                                            |
 | `outdir=$dir`                  | Output directory for all GeMoMa results.                                     |
+
+Save this script as `run_gemoma.sh` and run it in a terminal with the command:
+
+```bash
+chmod +x run_gemoma.sh
+./run_gemoma.sh
+```
 
 
 ## 📈 Interpreting results
