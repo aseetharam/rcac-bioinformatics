@@ -1,6 +1,14 @@
 ---
 authors:
-- person_a
+  - name: Marissa Myst
+    affiliations:
+      - id: ubc
+        institution: University of British Columbia
+        ror: 03rmrcq20
+        department: Earth, Ocean and Atmospheric Sciences
+  	  - ACME Inc
+  - name: Miles Mysterson
+    affiliation: ubc
 ---
 
 🛠️ **Prerequisites**

@@ -244,6 +244,12 @@ busco \
     -l poales_odb10
 ```
 
+We can compare the results with the previously generated Helixer and B73.v5 annotations and whole genome assembly BUSCO results.
+
+
+![Busco results](assets/figures/gemoma_busco_figure.png)
+
+**Figure 1: BUSCO results for Helixer, B73.v5 (MaizeGDB) and merged (GeMoMa) annotations.**
 
 
 #### B. Comparing annotations
