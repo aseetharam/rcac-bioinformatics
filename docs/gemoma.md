@@ -1,7 +1,7 @@
 # GeMoMa to merge annotations
 
 
-## 🛠️ **Prerequisites**
+## 📝 **Prerequisites**
 
 :::{card}
 **📁 Input files**
@@ -127,9 +127,10 @@ maize1GFF3=$(check_file Zm-B97-REFERENCE-NAM-1.0_Zm00018ab.1.gff3)
 helixer=$(check_file Zm-B73-HELIXER-NAM-1.0.gff3)
 
 # Other config
-name="B73_v5_GeMoMa"
-cpus=${SLURM_CPUS_ON_NODE:-8}
-dir="gemoma_output"
+name="B73_v5_GeMoMa" # Prefix for gene names
+cpus=${SLURM_CPUS_ON_NODE:-8} # Default to 8 CPUs if not running on SLURM
+TMPDIR=${TMPDIR:-/tmp} # Use system temp directory if not set
+dir="gemoma_output" # Output directory
 
 # Run GeMoMa
 java -Xms100g -Xmx200g -Djava.io.tmpdir=$TMPDIR -jar ${gemoma_jar} CLI GeMoMaPipeline \
@@ -141,7 +142,14 @@ java -Xms100g -Xmx200g -Djava.io.tmpdir=$TMPDIR -jar ${gemoma_jar} CLI GeMoMaPip
     AnnotationFinalizer.r=SIMPLE AnnotationFinalizer.p=$name \
     AnnotationFinalizer.n=true \
     sc=false o=false p=true pc=true pgr=false \
-    threads=$cpus outdir=$dir
+    threads=$cpus outdir=$dir &> ${dir}/gemoma.log
+```
+
+Save this script as `run_gemoma.sh` and run it in a terminal with the command:
+
+```bash
+chmod +x run_gemoma.sh
+./run_gemoma.sh
 ```
 
 The options used in the command above are:
@@ -170,13 +178,6 @@ The options used in the command above are:
 | `threads=$cpus`                | Number of compute threads to use.                                            |
 | `outdir=$dir`                  | Output directory for all GeMoMa results.                                     |
 
-Save this script as `run_gemoma.sh` and run it in a terminal with the command:
-
-```bash
-chmod +x run_gemoma.sh
-./run_gemoma.sh
-```
-
 
 ## 📈 Interpreting results
 
@@ -187,9 +188,154 @@ The GeMoMa output will be stored in the specified `gemoma_output` directory. The
 - `predicted_cds.fasta`: FASTA file with predicted coding sequences (CDS).
 
 
+If you examine the log file (`gemoma.log`), you will see some important stats, including any warnings or errors encountered during the run. 
+
+You can also check the number of genes and transcripts in the final annotation:
+
+```bash
+grep -v '^#' gemoma_output/final_annotation.gff | cut -f3 | sort | uniq -c
+```
+Which should give you the counts for all features.
+
+```
+ 246097 CDS
+  58847 gene
+  60137 mRNA
+```
+
+You can clean up the `gff` file using the `genometools` utility:
+
+```bash
+ml --force purge
+ml genometools
+ml agat
+gff3_file=gemoma_output/final_annotation.gff
+gt gff3 \
+   -sort \
+   -tidy \
+   -setsource "gemoma" \
+   -force \
+   -o B73-gemoma_gt.gff3 \
+   $gff3_file
+agat_convert_sp_gxf2gxf.pl \
+    -g B73-gemoma_gt.gff3 \
+    -o B73-gemoma_v1.0.gff3
+gffread B73-gemoma_v1.0.gff3 \
+    -g Zm-B73-REFERENCE-NAM-5.0.fa \
+    -x B73-gemoma_v1.0.cds.fasta  \
+    -y B73-gemoma_v1.0.pep.fasta
+```
+
 ### 🔎 Quality assessment
 
-work in progress.
+
+#### A. BUSCO profiling
+
+Run BUSCO to assess the completeness of the merged annotation:
+
+```bash
+ml --force purge
+ml busco
+busco \
+    -i B73-gemoma_v1.0.pep.fasta \
+    -c $SLURM_CPUS_ON_NODE \
+    -o B73-gemoma_v1.0_busco \
+    -m prot \
+    -l poales_odb10
+```
 
 
+
+#### B. Comparing annotations
+
+Compare Helixer original predictions with GeMoMa:
+
+```bash
+conda activate mikado
+mikado compare \
+    --protein-coding \
+    -r Zm-B73-HELIXER-NAM-1.0.gff3 \
+    -p B73-gemoma_v1.0.gff3 \
+    -o ref_NAM.B73v5-vs-prediction_HELIXERv1_compared \
+    --log compare.log
+```
+
+Compare B73.v5 (MaizeGDB) predictions with GeMoMa:
+
+```bash
+mikado compare \
+    --protein-coding \
+    -r Zm-B73-REFERENCE-NAM-5.0_Zm00001eb.1.gff3 \
+    -p B73-gemoma_v1.0.gff3 \
+    -o ref_NAM.B73v5-vs-prediction_HELIXERv1_compared \
+    --log compare.log
+```
+
+
+#### D. Functional annotation
+
+
+The Eukaryotic Non-Model Transcriptome Annotation Pipeline (EnTAP) can be used for functional annotation of the predicted genes. 
+
+```bash
+ml purge
+ml anaconda
+conda activate entap
+cds="B73-gemoma_v1.0.cds.fasta"
+EnTAP \
+    --runP \
+    -i ${cds} \
+    -d ${RCAC_SCRATCH}/entap_db/bin/ncbi_refseq_plants.dmnd \
+    -d ${RCAC_SCRATCH}/entap_db/bin/uniprot_sprot.dmnd  \
+    -t ${SLURM_CPUS_ON_NODE} \
+    --ini ${RCAC_SCRATCH}/entap_db/entap_config.ini
+
+```
+
+#### E. Summary Statistics
+
+You can summarize the results using the `agat` utility:
+
+```bash
+ml biocontainers
+ml agat
+agat_sp_statistics.pl \
+    -g B73-gemoma_v1.0.gff3 \
+    -o B73-gemoma_v1.0.stats
+```
+
+#### F. OMArk proteome assesment
+
+OMArk can be used to assess the quality of the predicted proteome:
+
+```bash
+ml --force purge
+ml seqtk
+omark_sif="${RCAC_SCRATCH}/omark/omark_0.3.0--pyh7cba7a3_0.sif"
+peptide="B73-gemoma_v1.0.pep.fasta"
+database="${RCAC_SCRATCH}/omark/LUCA.h5"
+grep ">" ${peptide} |\
+    sed -e 's/gene=/\t/g' -e 's/>//g' |\
+    sort -uk2,2 |\
+    cut -f 1 > primary.ids
+seqtk subseq ${peptide} primary.ids > ${peptide%.*}.primary.pep.fasta
+apptainer exec ${omark_sif} omamer search \
+    --db ${database} \
+    --query ${peptide%.*}.primary.pep.fasta \
+    --out ${peptide%.*}.omamer \
+    --nthreads ${SLURM_CPUS_ON_NODE}
+```
+
+
+#### G. CDS assesments
+
+```bash
+cds="B73-gemoma_v1.0.cds.fasta"
+bioawk -c fastx 'BEGIN{OFS="\t"}{
+    print $name,length($seq),gc($seq),substr($seq,0,3),reverse(substr(reverse($seq),0,3))
+    }' ${cds} > ${cds%.*}.info
+```
+
+
+### 🎊 Conclusions
 
