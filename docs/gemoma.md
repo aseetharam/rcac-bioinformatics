@@ -342,6 +342,38 @@ bioawk -c fastx 'BEGIN{OFS="\t"}{
     }' ${cds} > ${cds%.*}.info
 ```
 
+The plots were generated using the following R script: [`cds_assesment.R`](assets/scripts/gemoma_cds_assesment.R)
+
+::::{tab-set}
+
+:::{tab-item} CDS length
+
+![cds length](assets/figures/gemoma_cds-length.png)
+
+Figure 8: Distribution of CDS length for GeMoMa, Helixer and NAM.v5 predictions. 
+
+:::
+
+
+:::{tab-item} GC content
+
+![GC content](assets/figures/gemoma_gc-content.png)
+
+Figure 9: Distribution of GC content for GeMoMa, Helixer and NAM.v5 predictions. 
+
+:::
+
+
+:::{tab-item} Codon type
+
+![codon type](assets/figures/gemoma_codon-type.png)
+
+Figure 10: Distribution of start and stop codons for GeMoMa, Helixer and NAM.v5 predictions.
+
+:::
+
+::::
+
 
 ### 🎊 Conclusions
 
