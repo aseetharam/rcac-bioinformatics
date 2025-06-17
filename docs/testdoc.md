@@ -1,10 +1,6 @@
 ---
-title: Test page to verify documentation rendering
 authors:
-  - name: Marissa Myst
-    affiliation: ubc
-  - name: Miles Mysterson
-    affiliations: ubc; stanford
+- person_a
 ---
 
 🛠️ **Prerequisites**
