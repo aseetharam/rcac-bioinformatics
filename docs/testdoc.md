@@ -1,5 +1,15 @@
 # Test page to verify documentation rendering
 
+---
+title: My Article
+authors:
+  - name: Marissa Myst
+    affiliation: ubc
+  - name: Miles Mysterson
+    affiliations: ubc; stanford
+---
+
+
 🛠️ **Prerequisites**
 
 
