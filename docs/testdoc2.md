@@ -1,0 +1,4 @@
+---
+authors:
+- person_a
+---

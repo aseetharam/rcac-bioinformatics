@@ -1,14 +1,11 @@
-# Test page to verify documentation rendering
-
 ---
-title: My Article
+title: Test page to verify documentation rendering
 authors:
   - name: Marissa Myst
     affiliation: ubc
   - name: Miles Mysterson
     affiliations: ubc; stanford
 ---
-
 
 🛠️ **Prerequisites**
 
@@ -19,6 +16,8 @@ authors:
 
 
 Note, that headings that are not at the root level of the document will not be included in the table of contents. Using the attrs_block extension, you can also add classes to headings
+
+
 
 
 {.bg-primary}
