@@ -1,4 +1,9 @@
+---
+author: Arun Seetharam
+---
+
 # Conda for bioinformatics
+*Author: {{author}}*
 
 Conda simplifies installing and managing bioinformatics software and dependencies, especially on shared systems like HPC clusters. It allows users to create isolated environments without requiring admin rights. This avoids conflicts between packages and ensures reproducibility.
 

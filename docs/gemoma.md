@@ -1,4 +1,9 @@
+---
+author: Arun Seetharam
+---
+
 # GeMoMa to merge annotations
+*Author: {{author}}*
 
 
 ## 📝 **Prerequisites**

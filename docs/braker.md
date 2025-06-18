@@ -1,4 +1,9 @@
+---
+author: Arun Seetharam
+---
+
 # Gene prediction using BRAKER3
+*Author: {{author}}*
 
 BRAKER3 is a pipeline that combines GeneMark-ET and AUGUSTUS to predict genes in eukaryotic genomes. This pipeline is particularly useful for annotating newly sequenced genomes. The flexibility of BRAKER3 allows users to provide various input datasets for improving gene prediction accuracy. In this example, we will use various scenarios to predict genes in a Maize genome using BRAKER3. Following are the scenarios we will cover:
 

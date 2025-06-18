@@ -3,6 +3,7 @@ author: Arun Seetharam
 ---
 
 # VISPR visualization
+*Author: {{author}}*
 
 
 :::{card} 

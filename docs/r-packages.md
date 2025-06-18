@@ -1,4 +1,9 @@
+---
+author: Arun Seetharam
+---
+
 # Installing R packages
+*Author: {{author}}*
 
 On RCAC clusters, you can load any R modules (`r-scrnaseq`, `r-rnaseq`, etc.) and install packages using `BiocManager` or `install.packages`. However, Since you don't have write access to the system library, you will need to install the packages in your custom location. Here is how you can do it:
 

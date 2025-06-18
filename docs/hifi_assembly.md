@@ -1,4 +1,9 @@
+---
+author: Arun Seetharam
+---
+
 # Genome assembly using HiFi reads
+*Author: {{author}}*
 
 A short guide to assemble genomes from long reads (PacBio HiFi) using [HiFiasm](https://github.com/chhylp123/hifiasm)
 

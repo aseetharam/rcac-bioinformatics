@@ -1,4 +1,9 @@
+---
+author: Arun Seetharam
+---
+
 # Transfer data with iRODS
+*Author: {{author}}*
 
 
 CyVerse provides a cloud-based data store accessible via iRODS, allowing researchers to manage and transfer large datasets. From RCAC clusters (Negishi, Bell,  Anvil), you can authenticate with your CyVerse account and use iCommands to list, upload, or download files efficiently. 

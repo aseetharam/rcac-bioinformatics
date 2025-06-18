@@ -1,4 +1,9 @@
+---
+author: Arun Seetharam
+---
+
 # Optimizing Trinity
+*Author: {{author}}*
 
 When running `trinity` on RCAC clusters, you will mostly likely hit the file limit if you are running Trinity on `/scratch` on Bell/Negishi cluster. Here are few recommendations to improve performance of your runs:
 

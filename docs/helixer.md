@@ -1,4 +1,9 @@
+---
+author: Arun Seetharam
+---
+
 # Gene prediction using Helixer
+*Author: {{author}}*
 
 Helixer is a deep learning-based gene prediction tool that uses a convolutional neural network (CNN) to predict genes in eukaryotic genomes. Helixer is trained on a wide range of eukaryotic genomes and can predict genes in both plant and animal genomes. Helixer can predict genes wihtout any extrinisic information such as RNA-seq data or homology information, purely based on the sequence of the genome.
 

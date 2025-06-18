@@ -1,4 +1,9 @@
+---
+author: Arun Seetharam
+---
+
 # Assemble mitochondrial genomes from long reads
+*Author: {{author}}*
 
 A short guide to assemble mitochondrial genomes from long reads (PacBio HiFi) using MitoHiFi program
 
