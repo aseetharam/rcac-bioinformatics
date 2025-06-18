@@ -1,4 +1,9 @@
+---
+author: Arun Seetharam
+---
+
 # Juicer on Negishi cluster
+*Author: {{author}}*
 
 Juicer is a pipeline for analyzing Hi-C data, including alignment, filtering, deduplication, and generation of `.hic` contact matrices. On Negishi, Juicer runs using a Singularity container with all required dependencies pre-installed (BWA, SAMtools, Java, etc.).
 

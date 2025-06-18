@@ -1,4 +1,5 @@
 ---
+author: Marissa Myst and Miles Mysterson
 authors:
   - name: Marissa Myst
     affiliations:
@@ -17,6 +18,7 @@ authors:
 
 
 ### Heading Level 3
+*Author: {{author}}*
 
 
 Note, that headings that are not at the root level of the document will not be included in the table of contents. Using the attrs_block extension, you can also add classes to headings
