@@ -421,6 +421,33 @@ gffread tsebra.gtf \
 ### B. Reference comparison
 
 
+::::{tab-set}
+
+:::{tab-item} Sn/Sp (/w isoforms)
+
+![Assigned features](assets/figures/braker_mikado_compare_with_isoforms.png)
+:::
+
+:::{tab-item} Sn/Sp (/w/o isoforms)
+
+![Assigned features](assets/figures/braker_mikado_compare_without_isoforms.png)
+:::
+
+:::{tab-item} Gene counts (/w isoforms)
+
+![Unassigned features](assets/figures/braker_mikado_compare_with_isoforms_counts.png)
+:::
+
+
+
+:::{tab-item} Gene counts (/w/o isoforms)
+
+![Unassigned features](assets/figures/braker_mikado_compare_without_isoforms_counts.png)
+:::
+
+::::
+
+
 ### C. Feature assignment
 
 
