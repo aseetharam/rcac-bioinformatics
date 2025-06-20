@@ -35,8 +35,6 @@ html:
 sphinx:
   config:
       # This is the new setting to enable substitutions
-    myst_enable_extensions:
-      - substitutions
     intersphinx_mapping:
       ebp:
         - "https://executablebooks.org/en/latest/"
