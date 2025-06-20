@@ -404,6 +404,121 @@ gffread tsebra.gtf \
         -g ${genome} \
         -y  tsebra_pep.fa \
         -x  tsebra_cds.fa
+```
 :::
 
 ::::
+
+
+## Comparing and Evaluating
+
+### A. BUSCO profiling
+
+
+![Busco results](assets/figures/braker_busco_figure.png)
+
+
+### B. Reference comparison
+
+
+### C. Feature assignment
+
+
+::::{tab-set}
+
+:::{tab-item} Assigned features
+
+![Assigned features](assets/figures/braker_assigned.png)
+:::
+
+:::{tab-item} Unassigned features
+
+![Unassigned features](assets/figures/braker_unassigned.png)
+:::
+
+::::
+
+### D. Functional annotation
+
+
+### E. Phylostrata analysis
+
+::::{tab-set}
+
+:::{tab-item} Phylostrata counts
+
+![Assigned features](assets/figures/braker_ps_counts.png)
+:::
+
+:::{tab-item} Phylostrata percentages
+
+![Unassigned features](assets/figures/braker_ps_percent.png)
+:::
+
+::::
+
+### F. GFF3 stats 
+
+
+![GFF3 stats](assets/figures/braker_summary_stats.png)
+
+### G. OMArk assesment
+
+::::{tab-set}
+
+:::{tab-item} Conserved Genes
+
+![braker consistency](assets/figures/braker_consistency.png)
+:::
+
+:::{tab-item} Conserved HOGs
+
+![braker_conservedHOGs](assets/figures/braker_conservedHOGs.png)
+:::
+
+::::
+
+### H. CDS assesments
+
+::::{tab-set}
+
+:::{tab-item} GC distribution
+
+![braker_cds-gc](assets/figures/braker_cds-gc.png)
+:::
+
+:::{tab-item} Length distribution
+
+![braker_cds-length](assets/figures/braker_cds-length.png)
+:::
+
+
+:::{tab-item} GC content
+
+![braker_gc-content](assets/figures/braker_gc-content.png)
+:::
+
+:::{tab-item} Codon type
+
+![braker_codon-type](assets/figures/braker_codon-type.png)
+:::
+
+
+::::
+
+
+## Key Points
+
+
+
+
+
+
+## 5. References
+
+
+
+
+
+
+
