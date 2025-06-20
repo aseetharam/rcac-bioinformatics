@@ -408,12 +408,13 @@ gffread tsebra.gtf \
 :::
 
 ::::
+## Processing output
+
 
 
 ## Comparing and Evaluating
 
 ### A. BUSCO profiling
-
 
 ![Busco results](assets/figures/braker_busco_figure.png)
 
@@ -466,6 +467,24 @@ gffread tsebra.gtf \
 ::::
 
 ### D. Functional annotation
+
+:::{tab-item} Pfam domains
+
+![Pfam Domains](assets/figures/braker_pfam-domain.png)
+:::
+
+:::{tab-item} Functional annotation
+
+![Functional Annotation](assets/figures/braker_gene-function.png)
+:::
+
+:::{tab-item} Percent Identity
+
+![Percent identity](assets/figures/braker_pid.png)
+:::
+
+
+::::
 
 
 ### E. Phylostrata analysis
@@ -530,18 +549,18 @@ gffread tsebra.gtf \
 ![braker_codon-type](assets/figures/braker_codon-type.png)
 :::
 
-
 ::::
 
 
-## Key Points
+
+## Conclusions
 
 
 
 
 
 
-## 5. References
+## References
 
 
 
